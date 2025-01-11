@@ -1,0 +1,14 @@
+td {
+	width: 40px;
+	height: 40px;
+}
+
+.start {
+	background-color: #aaa;
+}
+
+.block,
+.stairs {
+	background-color: #888;
+}
+
