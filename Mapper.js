@@ -38,8 +38,10 @@ class Mapper {
 					item = "+";
 				}
 
-				cell.className = Mapper.items[item];
-				//cell.textContent = char;
+				if (item in Mapper.items) {
+					cell.className = Mapper.items[item];
+				}
+
 				row.appendChild(cell);
 			}
 		});
