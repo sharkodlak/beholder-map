@@ -20,26 +20,37 @@ class Mapper {
 		"1": "south stairs up",
 	}
 
+	constructor(map, stairs) {
+		this.map = map;
+		this.stairs = stairs;
+	}
+
 	generateMap() {
 		const mapElement = document.getElementById("map");
-		const lines = map.split("\n");
-		lines.forEach(line => {
+		const lines = this.map.split("\n");
+		lines.forEach((line, y) => {
 			const row = document.createElement("tr");
 			mapElement.appendChild(row);
 			const firstCharPos = line.indexOf(line.trim()[0]);
 			const lastCharPos = line.lastIndexOf(line.trim().slice(-1));
 	
-			for (let i = 0; i < line.length; i++) {
-				const char = line[i];
+			for (let x = 0; x < line.length; x++) {
+				const char = line[x];
 				const cell = document.createElement("td");
 				let item = char;
 
-				if (i < firstCharPos || i > lastCharPos) {
+				if (x < firstCharPos || x > lastCharPos) {
 					item = "+";
 				}
 
 				if (item in Mapper.items) {
 					cell.className = Mapper.items[item];
+				}
+
+				for (const [stair, value] of Object.entries(this.stairs)) {
+					if (value[0] === x && value[1] === y) {
+						cell.textContent = stair;
+					}
 				}
 
 				row.appendChild(cell);

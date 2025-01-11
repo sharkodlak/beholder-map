@@ -6,6 +6,7 @@ td {
 
 .start {
 	background-color: #aaa;
+	clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
 .block,
@@ -14,23 +15,39 @@ td {
 }
 
 .door::before {
-    content: "";
-    position: absolute;
-    background-color: #777;
+	content: "";
+	position: absolute;
+	background-color: #777;
 }
 
 .door.east-west::before {
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    transform: translateY(-50%);
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 8px;
+	transform: translateY(-50%);
 }
 
 .door.north-south::before {
-    left: 50%;
-    top: 0;
-    height: 100%;
-    width: 8px;
-    transform: translateX(-50%);
+	left: 50%;
+	top: 0;
+	height: 100%;
+	width: 8px;
+	transform: translateX(-50%);
+}
+
+.stairs.north {
+	clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
+}
+
+.stairs.west {
+	clip-path: polygon(0 0, 50% 50%, 0 100%, 100% 100%, 100% 0);
+}
+
+.stairs.east {
+	clip-path: polygon(0 0, 50% 50%, 0 100%, 100% 100%, 100% 0);
+}
+
+.stairs.south {
+	clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
 }
