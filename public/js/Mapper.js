@@ -25,43 +25,36 @@ class Mapper {
 
 	map;
 
-	constructor(map, stairs) {
+	constructor(map) {
 		this.map = map;
-		this.stairs = stairs;
 	}
 
 	generateMap() {
 		const mapElement = document.getElementById("map");
-		const lines = this.map.split("\n");
-		lines.forEach((line, y) => {
-			const row = document.createElement("tr");
-			mapElement.appendChild(row);
-			const firstCharPos = line.indexOf(line.trim()[0]);
-			const lastCharPos = line.lastIndexOf(line.trim().slice(-1));
-	
-			for (let x = 0; x < line.length; x++) {
-				const char = line[x];
-				const cell = document.createElement("td");
-				let item = char;
+		this.map.forEach((row, y) => {
+			const rowElement = document.createElement("tr");
+			mapElement.appendChild(rowElement);
 
-				if (x < firstCharPos || x > lastCharPos) {
+			row.forEach((item, x) => {
+				const cellElement = document.createElement("td");
+
+				if (x < row.firstBlockPosition || x > row.lastBlockPosition) {
 					item = "+";
 				}
 
 				if (item in Mapper.items) {
-					cell.className = Mapper.items[item];
+					cellElement.className = Mapper.items[item];
 				}
 
-				for (const [stair, value] of Object.entries(this.stairs)) {
+				for (const [stair, value] of Object.entries(this.map.stairs)) {
 					if (value[0] === x && value[1] === y) {
-						cell.textContent = stair;
+						cellElement.textContent = stair;
 					}
 				}
 
-				row.appendChild(cell);
-			}
+				rowElement.appendChild(cellElement);
+			});
 		});
-		const row = document.createElement("tr");
 	}
 }
 

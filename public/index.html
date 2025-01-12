@@ -11,41 +11,9 @@
 		async function initialize() {
 			const text01 = await GameMap.load("maps/level-01.txt");
 			const map01 = GameMap.parse(text01);
-			const mapper = new Mapper(map, stairs);
+			const mapper = new Mapper(map01);
 			mapper.generateMap();
 		}
-
-		const map = ""
-			// 000000000011111111112222
-			// 012345678901234567890123
-			+ "                ##      \n" // 00
-			+ "               #  #     \n" // 01
-			+ "            ####  #     \n" // 02
-			+ "           #   ##  #    \n" // 03
-			+ "           # #   # #    \n" // 04
-			+ "          ##-##  #  #   \n" // 05
-			+ "         #     ###  #   \n" // 06
-			+ "         #-###-# #-#    \n" // 07
-			+ "     #^##  #   # #_#    \n" // 08
-			+ "     #      #  #   #    \n" // 09
-			+ "      ###  ## #  # #    \n" // 10
-			+ "    ##   ## # #  #_#+#  \n" // 11
-			+ "   #     _|   #-#   # # \n" // 12
-			+ "   # #   ## ##  ##-# . #\n" // 13
-			+ "  ## #######   ##   # # \n" // 14
-			+ " #           ## #   # # \n" // 15
-			+ " # #-##########  # #  # \n" // 16
-			+ " # #        _| 6     #  \n" // 17
-			+ " # #   ###   #####-##   \n" // 18
-			+ " # #   # # ##      #    \n" // 19
-			+ "#   ###  #    #####     \n" // 20
-			+ "#       #+####          \n" // 21
-			+ "#   ####                \n" // 22
-			+ " ###                    \n" // 23
-		;
-		const stairs = {
-			"a": [15, 17],
-		};
 
 		document.addEventListener("DOMContentLoaded", initialize);
 	</script>

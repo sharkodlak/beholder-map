@@ -25,6 +25,9 @@ class GameMap {
 					map[y] = [];
 				}
 
+				map[y].firstBlockPosition = line.indexOf(line.trim()[0]);
+				map[y].lastBlockPosition = line.lastIndexOf(line.trim().slice(-1));
+
 				for (let x = 0; x < line.length; x++) {
 					const char = line[x];
 					map[y][x] = char;
@@ -42,6 +45,17 @@ class GameMap {
 	constructor(map, stairs) {
 		this.map = map;
 		this.stairs = stairs;
+	}
+
+	forEach(callback) {
+		const frozenMap = Object.freeze(
+			this.map.map(row => {
+				return Object.freeze(row);
+			})
+		);
+		frozenMap.forEach((row, y) => {
+			callback(row, y, frozenMap);
+		});
 	}
 }
 
