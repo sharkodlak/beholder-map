@@ -22,6 +22,10 @@ td {
 	background-color: #888;
 }
 
+.expected {
+	background-color: #aaa;
+}
+
 .door::before {
 	content: "";
 	position: absolute;
@@ -44,18 +48,26 @@ td {
 	transform: translateX(-50%);
 }
 
-.stairs.north {
-	clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
+.stairs.north.down {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 83% 100%, 50% 67%, 17% 100%, 0 100%);
 }
 
-.stairs.west {
-	clip-path: polygon(0 0, 50% 50%, 0 100%, 100% 100%, 100% 0);
+.stairs.west.down {
+	clip-path: polygon(0 0, 100% 0, 100% 17%, 67% 50%, 100% 83%, 100% 100%, 0 100%);
 }
 
-.stairs.east {
+.stairs.east.down {
 	clip-path: polygon(0 0, 0 17%, 33% 50%, 0 83%, 0 100%, 100% 100%, 100% 0);
 }
 
-.stairs.south {
-	clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+.stairs.south.down {
+	clip-path: polygon(0 0, 17% 0, 50% 33%, 83% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.stairs.north.up {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 67% 100%, 83% 67%, 17% 67%, 33% 100%, 0 100%);
+}
+
+.stairs.west.up {
+	clip-path: polygon(0 0, 100% 0, 100% 33%, 67% 17%, 67% 83%, 100% 67%, 100% 100%, 0 100%);
 }

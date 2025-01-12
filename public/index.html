@@ -9,10 +9,20 @@
 		import { Mapper } from "./js/Mapper.js";
 
 		async function initialize() {
-			const text01 = await GameMap.load("maps/level-01.txt");
-			const map01 = GameMap.parse(text01);
-			const mapper = new Mapper(map01);
-			mapper.generateMap("level-01");
+			const maps = {
+				"level-01": "maps/level-01.txt",
+				"level-02": "maps/level-02.txt",
+			};
+			for (const [elementId, map] of Object.entries(maps)) {
+				loadAndDisplay(map, elementId);
+			}
+		}
+
+		async function loadAndDisplay(map, elementId) {
+			const text = await GameMap.load(map);
+			const gameMap = GameMap.parse(text);
+			const mapper = new Mapper(gameMap);
+			mapper.generateMap(elementId);
 		}
 
 		document.addEventListener("DOMContentLoaded", initialize);
@@ -21,5 +31,8 @@
 <body>
 	<h2>Level 01</h2>
 	<table id="level-01"></table>
+
+	<h2>Level 02</h2>
+	<table id="level-02"></table>
 </body>
 

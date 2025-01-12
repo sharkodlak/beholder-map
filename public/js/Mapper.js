@@ -11,6 +11,7 @@ class Mapper {
 		"-": "door east-west",
 		"|": "door north-south",
 		"_": "pressure plate",
+		"*": "teleport",
 		// For understanding following numbers consider player on number 5
 		"9": "north stairs up",
 		"8": "north stairs down",

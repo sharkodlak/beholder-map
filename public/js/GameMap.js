@@ -11,7 +11,6 @@ class GameMap {
 		const map = [];
 		const stairs = {};
 		const lines = mapText.split("\n");
-		const lineLength = lines[0].length;
 		let isReadingMap = true;
 
 		lines.forEach((line, y) => {
@@ -27,6 +26,10 @@ class GameMap {
 
 				map[y].firstBlockPosition = line.indexOf(line.trim()[0]);
 				map[y].lastBlockPosition = line.lastIndexOf(line.trim().slice(-1));
+
+				if (map[y].firstBlockPosition === -1) {
+					map[y].firstBlockPosition = line.length;
+				}
 
 				for (let x = 0; x < line.length; x++) {
 					const char = line[x];
