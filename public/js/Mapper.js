@@ -29,8 +29,8 @@ class Mapper {
 		this.map = map;
 	}
 
-	generateMap() {
-		const mapElement = document.getElementById("map");
+	generateMap(elementId) {
+		const mapElement = document.getElementById(elementId);
 		this.map.forEach((row, y) => {
 			const rowElement = document.createElement("tr");
 			mapElement.appendChild(rowElement);

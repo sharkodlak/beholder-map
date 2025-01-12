@@ -12,13 +12,14 @@
 			const text01 = await GameMap.load("maps/level-01.txt");
 			const map01 = GameMap.parse(text01);
 			const mapper = new Mapper(map01);
-			mapper.generateMap();
+			mapper.generateMap("level-01");
 		}
 
 		document.addEventListener("DOMContentLoaded", initialize);
 	</script>
 </head>
 <body>
-	<table id="map"></table>
+	<h2>Level 01</h2>
+	<table id="level-01"></table>
 </body>
 
