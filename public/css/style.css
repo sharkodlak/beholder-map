@@ -45,7 +45,7 @@ td {
 }
 
 .stairs.east {
-	clip-path: polygon(0 0, 50% 50%, 0 100%, 100% 100%, 100% 0);
+	clip-path: polygon(0 0, 0 17%, 33% 50%, 0 83%, 0 100%, 100% 100%, 100% 0);
 }
 
 .stairs.south {

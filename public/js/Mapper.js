@@ -1,3 +1,5 @@
+import { Map } from "./Map.js";
+
 class Mapper {
 	static items = {
 		"@": "start",
@@ -19,6 +21,8 @@ class Mapper {
 		"2": "south stairs down",
 		"1": "south stairs up",
 	}
+
+	map;
 
 	constructor(map, stairs) {
 		this.map = map;
@@ -59,3 +63,5 @@ class Mapper {
 		const row = document.createElement("tr");
 	}
 }
+
+export { Mapper };
