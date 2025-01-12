@@ -1,8 +1,8 @@
-import { Map } from "./Map.js";
+import { GameMap } from "./GameMap.js";
 
 class Mapper {
 	static items = {
-		"@": "start",
+		"^": "start",
 		"#": "block",
 		"+": "expected block",
 		",": "floor hole",
@@ -16,6 +16,7 @@ class Mapper {
 		"8": "north stairs down",
 		"7": "west stairs up",
 		"6": "east stairs down",
+		// "5" can be used for something else
 		"4": "west stairs down",
 		"3": "east stairs up",
 		"2": "south stairs down",

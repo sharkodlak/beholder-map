@@ -1,4 +1,4 @@
-class Map {
+class GameMap {
 	map;
 	stairs;
 
@@ -7,22 +7,27 @@ class Map {
 		return await response.text();
 	}
 
-	static fromText(mapText) {
+	static parse(mapText) {
 		const map = [];
 		const stairs = {};
-		const lines = text.split("\n");
+		const lines = mapText.split("\n");
 		const lineLength = lines[0].length;
 		let isReadingMap = true;
 
 		lines.forEach((line, y) => {
 			if (line === "") {
 				isReadingMap = false;
+				return;
 			}
 
 			if (isReadingMap) {
+				if (typeof map[y] === "undefined") {
+					map[y] = [];
+				}
+
 				for (let x = 0; x < line.length; x++) {
 					const char = line[x];
-					map[y * lineLength + x] = char;
+					map[y][x] = char;
 				}
 			} else {
 				const stair = line[0];
@@ -31,7 +36,7 @@ class Map {
 			}
 		});
 
-		return new Map(map, stairs);
+		return new GameMap(map, stairs);
 	}
 
 	constructor(map, stairs) {
@@ -40,4 +45,4 @@ class Map {
 	}
 }
 
-export { Map };
+export { GameMap };

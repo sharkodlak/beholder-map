@@ -5,7 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="module" src="js/Mapper.js"></script>
 	<script type="module">
+		import { GameMap } from "./js/GameMap.js";
 		import { Mapper } from "./js/Mapper.js";
+
+		async function initialize() {
+			const text01 = await GameMap.load("maps/level-01.txt");
+			const map01 = GameMap.parse(text01);
+			const mapper = new Mapper(map, stairs);
+			mapper.generateMap();
+		}
 
 		const map = ""
 			// 000000000011111111112222
@@ -18,7 +26,7 @@
 			+ "          ##-##  #  #   \n" // 05
 			+ "         #     ###  #   \n" // 06
 			+ "         #-###-# #-#    \n" // 07
-			+ "     #@##  #   # #_#    \n" // 08
+			+ "     #^##  #   # #_#    \n" // 08
 			+ "     #      #  #   #    \n" // 09
 			+ "      ###  ## #  # #    \n" // 10
 			+ "    ##   ## # #  #_#+#  \n" // 11
@@ -39,10 +47,7 @@
 			"a": [15, 17],
 		};
 
-		document.addEventListener("DOMContentLoaded", function() {
-			const mapper = new Mapper(map, stairs);
-			mapper.generateMap();
-		});
+		document.addEventListener("DOMContentLoaded", initialize);
 	</script>
 </head>
 <body>
