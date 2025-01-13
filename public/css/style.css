@@ -48,26 +48,44 @@ td {
 	transform: translateX(-50%);
 }
 
-.stairs.north.down {
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 83% 100%, 50% 67%, 17% 100%, 0 100%);
+.stairs::before {
+	content: "";
+	background-color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
 }
 
-.stairs.west.down {
-	clip-path: polygon(0 0, 100% 0, 100% 17%, 67% 50%, 100% 83%, 100% 100%, 0 100%);
+.stairs.north.down::before {
+	clip-path: polygon(17% 100%, 50% 67%, 83% 100%);
 }
 
-.stairs.east.down {
-	clip-path: polygon(0 0, 0 17%, 33% 50%, 0 83%, 0 100%, 100% 100%, 100% 0);
+.stairs.west.down::before {
+	clip-path: polygon(100% 17%, 67% 50%, 100% 83%);
 }
 
-.stairs.south.down {
-	clip-path: polygon(0 0, 17% 0, 50% 33%, 83% 0, 100% 0, 100% 100%, 0 100%);
+.stairs.east.down::before {
+	clip-path: polygon(0 17%, 33% 50%, 0 83%);
 }
 
-.stairs.north.up {
+.stairs.south.down::before {
+	clip-path: polygon(17% 0, 50% 33%, 83% 0);
+}
+
+.stairs.north.up::before {
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 67% 100%, 83% 67%, 17% 67%, 33% 100%, 0 100%);
 }
 
-.stairs.west.up {
-	clip-path: polygon(0 0, 100% 0, 100% 33%, 67% 17%, 67% 83%, 100% 67%, 100% 100%, 0 100%);
+.stairs.west.up::before {
+	clip-path: polygon(67% 17%, 67% 83%, 133% 50%);
+}
+
+.stair {
+	text-align: center;
+	font-size: 35px;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+	z-index: 1;
 }
