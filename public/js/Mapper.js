@@ -4,6 +4,7 @@ class Mapper {
 	static items = {
 		"^": "start",
 		"#": "block",
+		"=": "imaginary block",
 		"+": "expected block",
 		",": "floor hole",
 		".": "ceiling hole",

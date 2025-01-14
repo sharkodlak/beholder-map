@@ -26,6 +26,11 @@ td {
 	background-color: #aaa;
 }
 
+.imaginary {
+	background-color: #eee;
+	border: 2px dashed #99f;
+}
+
 .door::before {
 	content: "";
 	position: absolute;
