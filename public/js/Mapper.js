@@ -12,6 +12,18 @@ class Mapper {
 		"-": "door east-west",
 		"|": "door north-south",
 		"_": "pressure-plate",
+		"↑": "button north",
+		"←": "button west",
+		"→": "button east",
+		"↓": "button south",
+		"⇧": "keyhole north",
+		"⇦": "keyhole west",
+		"⇨": "keyhole east",
+		"⇩": "keyhole south",
+		"̲": "niche north",
+		"̸": "niche west",
+		"̷": "niche east",
+		"̅ ": "niche south",
 		"*": "teleport",
 		// For understanding following numbers consider player on number 5
 		"9": "north stairs up",
@@ -24,6 +36,8 @@ class Mapper {
 		"2": "south stairs down",
 		"1": "south stairs up",
 	}
+
+	static passableBlocks = " =.-|_*";
 
 	map;
 

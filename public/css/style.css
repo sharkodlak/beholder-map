@@ -8,8 +8,8 @@ table {
 
 td {
 	position: relative;
-	width: 40px;
-	height: 40px;
+	width: 36px;
+	height: 36px;
 }
 
 .start {
@@ -20,6 +20,23 @@ td {
 .block,
 .stairs {
 	background-color: #888;
+}
+
+.button {
+	background-image: url('../img/css/button-north.svg');
+	background-size: 100% 100%;
+}
+
+.button.west {
+	transform: rotate(-90deg);
+}
+
+.button.east {
+	transform: rotate(90deg);
+}
+
+.button.south {
+	transform: rotate(180deg);
 }
 
 .expected {
