@@ -10,7 +10,7 @@ class Mapper {
 		";": "floor ceiling hole",
 		"-": "door east-west",
 		"|": "door north-south",
-		"_": "pressure plate",
+		"_": "pressure-plate",
 		"*": "teleport",
 		// For understanding following numbers consider player on number 5
 		"9": "north stairs up",
