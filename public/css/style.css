@@ -48,6 +48,14 @@ td {
 	transform: translateX(-50%);
 }
 
+.hole.ceiling {
+	background-image: url('../img/css/hole-ceiling.svg');
+}
+
+.hole.floor {
+	background-image: url('../img/css/hole-floor.svg');
+}
+
 .pressure-plate {
 	border: 2px solid #aaa;
 	position: absolute;
