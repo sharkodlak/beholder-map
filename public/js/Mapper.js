@@ -50,9 +50,12 @@ class Mapper {
 				for (const [stair, value] of Object.entries(this.map.stairs)) {
 					if (value[0] === x && value[1] === y) {
 						const stairElement = document.createElement("div");
-						stairElement.className = "stair";
-						stairElement.textContent = stair;
+						stairElement.className = "shape";
 						cellElement.appendChild(stairElement);
+
+						const stairLabelElement = document.createElement("span");
+						stairLabelElement.textContent = stair;
+						cellElement.appendChild(stairLabelElement);
 					}
 				}
 

@@ -48,44 +48,51 @@ td {
 	transform: translateX(-50%);
 }
 
-.stairs::before {
-	content: "";
+.stairs > .shape {
 	background-color: #fff;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 0;
 }
 
-.stairs.north.down::before {
+.stairs.north.down > .shape {
 	clip-path: polygon(17% 100%, 50% 67%, 83% 100%);
 }
 
-.stairs.west.down::before {
+.stairs.west.down > .shape {
 	clip-path: polygon(100% 17%, 67% 50%, 100% 83%);
 }
 
-.stairs.east.down::before {
+.stairs.east.down > .shape {
 	clip-path: polygon(0 17%, 33% 50%, 0 83%);
 }
 
-.stairs.south.down::before {
+.stairs.south.down > .shape {
 	clip-path: polygon(17% 0, 50% 33%, 83% 0);
 }
 
-.stairs.north.up::before {
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 67% 100%, 83% 67%, 17% 67%, 33% 100%, 0 100%);
+.stairs.north.up > .shape {
+	clip-path: polygon(17% 67%, 83% 67%, 50% 133%);
 }
 
-.stairs.west.up::before {
+.stairs.west.up > .shape {
 	clip-path: polygon(67% 17%, 67% 83%, 133% 50%);
 }
 
-.stair {
+.stairs.east.up > .shape {
+	clip-path: polygon(33% 17%, 33% 83%, -33% 50%);
+}
+
+.stairs.south.up > .shape {
+	clip-path: polygon(17% 33%, 83% 33%, 50% -33%);
+}
+
+.stairs > span {
+	display: block;
+	position: relative;
 	text-align: center;
 	font-size: 35px;
 	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
-	z-index: 1;
 }
