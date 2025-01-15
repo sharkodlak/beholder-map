@@ -4,12 +4,14 @@ h2 {
 
 table {
 	margin: 0 auto;
+	border-collapse: collapse;
 }
 
 td {
 	position: relative;
 	width: 35px;
 	height: 35px;
+	border: 1px dotted #888;
 }
 
 .start {
@@ -68,12 +70,16 @@ td {
 	background-color: #aaa;
 }
 
-.hole.ceiling {
+.hole.ceiling > .hole.ceiling {
+	width: 100%;
+	height: 100%;
 	background-image: url('../img/css/hole-ceiling.svg');
+	background-size: 100% 100%;
 }
 
 .hole.floor {
 	background-image: url('../img/css/hole-floor.svg');
+	background-size: 100% 100%;
 }
 
 .imaginary {

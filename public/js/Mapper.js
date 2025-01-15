@@ -35,9 +35,17 @@ class Mapper {
 		"3": "east stairs up",
 		"2": "south stairs down",
 		"1": "south stairs up",
-	}
+	};
 
-	static passableBlocks = " =.-|_*";
+	static passableBlocks = " =.-|_↑←→↓⇧⇦⇨⇩*";
+
+	static cellCreator = {
+		"ceiling hole": (cellElement) => {
+			const holeElement = document.createElement("div");
+			holeElement.className = "ceiling hole";
+			cellElement.appendChild(holeElement);
+		}
+	};
 
 	map;
 
@@ -59,7 +67,13 @@ class Mapper {
 				}
 
 				if (item in Mapper.items) {
-					cellElement.className = Mapper.items[item];
+					const longName = Mapper.items[item];
+					const creatorKey = Object.keys(Mapper.cellCreator).find((key) => longName.indexOf(key) !== -1);
+					cellElement.className = longName;
+
+					if (creatorKey) {
+						Mapper.cellCreator[creatorKey](cellElement);
+					}
 				}
 
 				for (const [stair, value] of Object.entries(this.map.stairs)) {
