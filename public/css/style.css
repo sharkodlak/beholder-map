@@ -12,6 +12,7 @@ td {
 	width: 35px;
 	height: 35px;
 	border: 1px dotted #888;
+	overflow: hidden;
 }
 
 .start {
@@ -54,7 +55,7 @@ td {
 	top: 50%;
 	left: 0;
 	width: 100%;
-	height: 8px;
+	height: 20%;
 	transform: translateY(-50%);
 }
 
@@ -62,7 +63,7 @@ td {
 	left: 50%;
 	top: 0;
 	height: 100%;
-	width: 8px;
+	width: 20%;
 	transform: translateX(-50%);
 }
 
@@ -98,51 +99,56 @@ td {
 	background-size: 100% 100%;
 }
 
-.stairs > .shape {
-	background-color: #fff;
+.stairs > .stairs {
 	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
+	background-image: url('../img/css/stairs-north.svg');
+	background-size: 100% 100%;
 }
 
-.stairs.north.down > .shape {
-	clip-path: polygon(17% 100%, 50% 67%, 83% 100%);
+.stairs.down.north > .stairs {
+	bottom: -15%;
 }
 
-.stairs.west.down > .shape {
-	clip-path: polygon(100% 17%, 67% 50%, 100% 83%);
+.stairs.down.east > .stairs {
+	left: -15%;
+	transform: rotate(90deg);
 }
 
-.stairs.east.down > .shape {
-	clip-path: polygon(0 17%, 33% 50%, 0 83%);
+.stairs.down.west > .stairs {
+	right: -15%;
+	transform: rotate(-90deg);
 }
 
-.stairs.south.down > .shape {
-	clip-path: polygon(17% 0, 50% 33%, 83% 0);
+.stairs.down.south > .stairs {
+	top: -15%;
+	transform: rotate(180deg);
 }
 
-.stairs.north.up > .shape {
-	clip-path: polygon(17% 67%, 83% 67%, 50% 133%);
+.stairs.up.north > .stairs {
+	bottom: 75%;
 }
 
-.stairs.west.up > .shape {
-	clip-path: polygon(67% 17%, 67% 83%, 133% 50%);
+.stairs.up.west > .stairs {
+	transform: rotate(90deg);
+	left: 75%;
 }
 
-.stairs.east.up > .shape {
-	clip-path: polygon(33% 17%, 33% 83%, -33% 50%);
+.stairs.up.east > .stairs {
+	transform: rotate(-90deg);
+	right: 75%;
 }
 
-.stairs.south.up > .shape {
-	clip-path: polygon(17% 33%, 83% 33%, 50% -33%);
+.stairs.up.south > .stairs {
+	transform: rotate(180deg);
+	top: 75%;
 }
 
 .stairs > span {
 	display: block;
 	position: relative;
 	text-align: center;
-	font-size: 33px;
+	font-size: calc(min(1vw, 1vh) * 1.9);
 	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
 }

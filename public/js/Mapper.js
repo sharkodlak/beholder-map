@@ -44,6 +44,11 @@ class Mapper {
 			const holeElement = document.createElement("div");
 			holeElement.className = "ceiling hole";
 			cellElement.appendChild(holeElement);
+		},
+		"stairs": (cellElement) => {
+			const stairsElement = document.createElement("div");
+			stairsElement.className = "stairs";
+			cellElement.appendChild(stairsElement);
 		}
 	};
 
@@ -78,10 +83,6 @@ class Mapper {
 
 				for (const [stair, value] of Object.entries(this.map.stairs)) {
 					if (value[0] === x && value[1] === y) {
-						const stairElement = document.createElement("div");
-						stairElement.className = "shape";
-						cellElement.appendChild(stairElement);
-
 						const stairLabelElement = document.createElement("span");
 						stairLabelElement.textContent = stair;
 						cellElement.appendChild(stairLabelElement);
