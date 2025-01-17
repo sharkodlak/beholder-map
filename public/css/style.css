@@ -3,6 +3,8 @@ h2 {
 }
 
 table {
+	width: 99vmin;
+	height: 99vmin;
 	margin: 0 auto;
 	border-collapse: collapse;
 }
@@ -149,6 +151,6 @@ td {
 	display: block;
 	position: relative;
 	text-align: center;
-	font-size: calc(min(1vw, 1vh) * 1.9);
+	font-size: 2.5vmin;
 	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
 }
