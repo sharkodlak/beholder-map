@@ -37,7 +37,7 @@ class Mapper {
 		"1": "south stairs up",
 	};
 
-	static passableBlocks = " =.-|_↑←→↓⇧⇦⇨⇩*";
+	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*";
 
 	static cellCreator = {
 		"ceiling hole": (cellElement) => {
@@ -52,6 +52,72 @@ class Mapper {
 		}
 	};
 
+	static keyToDirection = {
+		"ArrowUp": "north",
+		"ArrowDown": "south",
+		"ArrowLeft": "west",
+		"ArrowRight": "east"
+	};
+
+	static usedByParty;
+
+	static pressedKeys = new Set();
+
+	static onKeyDown(event) {
+		if (Mapper.pressedKeys.has(event.key)) {
+			return;
+		}
+
+		const direction = Mapper.keyToDirection[event.key];
+
+		if (direction) {
+			Mapper.moveParty(direction);
+		}
+
+		Mapper.pressedKeys.add(event.key);
+	}
+
+	static onKeyUp(event) {
+		Mapper.pressedKeys.delete(event.key);
+	}
+
+	static moveParty(direction) {
+		const partyElement = document.getElementById("party");
+
+		if (!partyElement) {
+			return;
+		}
+
+		partyElement.className = direction;
+		const cell = partyElement.parentElement;
+		let deltaX;
+		let deltaY;
+
+		switch (direction) {
+			case "north":
+				deltaY = -1;
+				break;
+			case "south":
+				deltaY = 1;
+				break;
+			case "west":
+				deltaX = -1;
+				break;
+			case "east":
+				deltaX = 1;
+				break;
+		}
+
+		const newCell = Mapper.usedByParty.getCellElement(cell, deltaX, deltaY);
+
+		if (!Mapper.usedByParty.isPassable(newCell)) {
+			return;
+		}
+
+		partyElement.remove();
+		newCell.appendChild(partyElement);
+	}
+
 	map;
 
 	constructor(map) {
@@ -60,6 +126,7 @@ class Mapper {
 
 	generateMap(elementId) {
 		const mapElement = document.getElementById(elementId);
+		mapElement.addEventListener("click", this.onCellClick.bind(this));
 		this.map.forEach((row, y) => {
 			const rowElement = document.createElement("tr");
 			mapElement.appendChild(rowElement);
@@ -92,6 +159,63 @@ class Mapper {
 				rowElement.appendChild(cellElement);
 			});
 		});
+	}
+
+	onCellClick(event) {
+		const cell = event.target.closest("td");
+
+		if (cell) {
+			this.placeParty(cell);
+		}
+	}
+
+	placeParty(cell) {
+		if (!this.isPassable(cell)) {
+			return;
+		}
+
+		let partyElement = document.getElementById("party");
+
+		if (partyElement) {
+			partyElement.remove();
+		} else {
+			partyElement = document.createElement("div");
+			partyElement.id = "party";
+		}
+
+		cell.appendChild(partyElement);
+		Mapper.usedByParty = this;
+	}
+
+	isPassable(cell) {
+		const cellCoordinates = this.getCellCoordinates(cell);
+		const block = this.map.getCell(cellCoordinates.x, cellCoordinates.y);
+
+		return Mapper.passableBlocks.includes(block);
+	}
+
+	getCellCoordinates(cell) {
+		const x = cell.cellIndex;
+		const y = cell.parentElement.rowIndex;
+
+		return { x, y };
+	}
+
+	getCellElement(cell, deltaX, deltaY) {
+		if (deltaX === undefined) {
+			deltaX = 0;
+		}
+
+		if (deltaY === undefined) {
+			deltaY = 0;
+		}
+
+		const mapElement = cell.parentElement.parentElement;
+		const x = ((cell.cellIndex + deltaX) % this.map.getWidth() + this.map.getWidth()) % this.map.getWidth();
+		const y = ((cell.parentElement.rowIndex + deltaY) % this.map.getHeight() + this.map.getHeight()) % this.map.getHeight();
+		const destinationRow = mapElement.children[y];
+
+		return destinationRow.children[x];
 	}
 }
 

@@ -60,6 +60,18 @@ class GameMap {
 			callback(row, y, frozenMap);
 		});
 	}
+
+	getHeight() {
+		return this.map.length;
+	}
+
+	getWidth() {
+		return this.map[0].length;
+	}
+
+	getCell(x, y) {
+		return this.map[y][x];
+	}
 }
 
 export { GameMap };

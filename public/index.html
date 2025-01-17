@@ -17,6 +17,9 @@
 			for (const [elementId, map] of Object.entries(maps)) {
 				loadAndDisplay(map, elementId);
 			}
+
+			document.addEventListener('keydown', Mapper.onKeyDown);
+			document.addEventListener('keyup', Mapper.onKeyUp);
 		}
 
 		async function loadAndDisplay(map, elementId) {
