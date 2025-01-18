@@ -1,4 +1,6 @@
 import { GameMap } from "./GameMap.js";
+import { Party } from "./Party.js";
+
 
 class Mapper {
 	static items = {
@@ -57,6 +59,22 @@ class Mapper {
 		"ArrowDown": "south",
 		"ArrowLeft": "west",
 		"ArrowRight": "east"
+	};
+
+	static directionToDelta = {
+		"north": { x: 0, y: -1 },
+		"south": { x: 0, y: 1 },
+		"west": { x: -1, y: 0 },
+		"east": { x: 1, y: 0 }
+	};
+
+	static keyToRelativeDirection = {
+		"9": "turn-right",
+		"8": "forward",
+		"7": "turn-left",
+		"6": "strafe-right",
+		"5": "backward",
+		"4": "strafe-left"
 	};
 
 	static usedByParty;
@@ -119,14 +137,23 @@ class Mapper {
 	}
 
 	map;
+	previousLevel;
+	nextLevel;
 
-	constructor(map) {
+	constructor(map, previousLevel, nextLevel) {
 		this.map = map;
+		this.previousLevel = previousLevel;
+	}
+
+	setNextLevel(nextLevel) {
+		this.nextLevel = nextLevel;
 	}
 
 	generateMap(elementId) {
 		const mapElement = document.getElementById(elementId);
+		mapElement.mapper = this;
 		mapElement.addEventListener("click", this.onCellClick.bind(this));
+		mapElement.addEventListener("mousedown", this.onCellMouseDown.bind(this));
 		this.map.forEach((row, y) => {
 			const rowElement = document.createElement("tr");
 			mapElement.appendChild(rowElement);
@@ -171,22 +198,25 @@ class Mapper {
 		}
 	}
 
+	onCellMouseDown(event) {
+		const cell = event.target.closest("td");
+
+		if (!cell) {
+			return;
+		}
+
+		if (event.button === 1) {
+			console.log(this.getCellCoordinates(cell));
+		}
+	}
+
+
 	placeParty(cell) {
 		if (!this.isPassable(cell)) {
 			return;
 		}
 
-		let partyElement = document.getElementById("party");
-
-		if (partyElement) {
-			partyElement.remove();
-		} else {
-			partyElement = document.createElement("div");
-			partyElement.id = "party";
-		}
-
-		cell.appendChild(partyElement);
-		Mapper.usedByParty = this;
+		Party.place(cell);
 	}
 
 	isPassable(cell) {

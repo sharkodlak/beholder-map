@@ -14,19 +14,27 @@
 				"level-02": "maps/level-02.txt",
 				"level-03": "maps/level-03.txt",
 			};
+			let previousLevel;
+
 			for (const [elementId, map] of Object.entries(maps)) {
-				loadAndDisplay(map, elementId);
+				previousLevel = await loadAndDisplay(map, elementId, previousLevel);
 			}
 
 			document.addEventListener('keydown', Mapper.onKeyDown);
 			document.addEventListener('keyup', Mapper.onKeyUp);
 		}
 
-		async function loadAndDisplay(map, elementId) {
+		async function loadAndDisplay(map, elementId, previousLevel) {
 			const text = await GameMap.load(map);
 			const gameMap = GameMap.parse(text);
-			const mapper = new Mapper(gameMap);
+			const mapper = new Mapper(gameMap, previousLevel);
+
+			if (previousLevel) {
+				previousLevel.setNextLevel(mapper);
+			}
+
 			mapper.generateMap(elementId);
+			return mapper;
 		}
 
 		document.addEventListener("DOMContentLoaded", initialize);
