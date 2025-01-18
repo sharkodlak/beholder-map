@@ -139,8 +139,10 @@ class Mapper {
 				}
 
 				if (item in Mapper.items) {
+					const divElement = document.createElement("div");
 					const longName = Mapper.items[item];
 					const creatorKey = Object.keys(Mapper.cellCreator).find((key) => longName.indexOf(key) !== -1);
+					cellElement.appendChild(divElement);
 					cellElement.className = longName;
 
 					if (creatorKey) {

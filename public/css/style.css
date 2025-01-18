@@ -27,18 +27,20 @@ td {
 	background-color: #888;
 }
 
-.button {
+.button > div:first-child {
+	width: 100%;
+	height: 100%;
 	background-image: url('../img/css/button-north.svg');
 	background-size: 100% 100%;
 }
 
-.button.west,
-.keyhole.west {
+.button.west > div:first-child,
+.keyhole.west > div:first-child {
 	transform: rotate(-90deg);
 }
 
-.button.east,
-.keyhole.east {
+.button.east > div:first-child,
+.keyhole.east > div:first-child {
 	transform: rotate(90deg);
 }
 
@@ -90,13 +92,20 @@ td {
 	border: 2px dashed #99f;
 }
 
-.keyhole {
+.keyhole > div:first-child {
+	width: 100%;
+	height: 100%;
 	background-image: url('../img/css/keyhole-north.svg');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
 
 #party {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	background-image: url('../img/css/party-north.svg');
 	background-size: 100% 100%;
 	height: 100%;
