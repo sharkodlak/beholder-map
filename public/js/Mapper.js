@@ -110,11 +110,11 @@ class Mapper {
 	generateMap(elementId) {
 		const domMap = document.getElementById(elementId);
 		domMap.mapper = this;
+		let cells = [];
 		this.map.forEach((row, y) => {
 			const domRow = document.createElement("tr");
 			domMap.appendChild(domRow);
-			let cell = undefined;
-			let westcell = undefined;
+			cells[y] = [];
 
 			row.forEach((block, x) => {
 				const domCell = document.createElement("td");
@@ -145,11 +145,25 @@ class Mapper {
 
 				domRow.appendChild(domCell);
 
-				westcell = cell;
-				cell = new Cell(block, domCell, x, y);
+				const northcell = cells[y - 1] && cells[y - 1][x];
+				const westcell = cells[y][x - 1];
+				const cell = new Cell(block, domCell, x, y);
+				cells[y][x] = cell;
 
 				if (typeof westcell !== "undefined") {
 					westcell.setEast(cell);
+				}
+
+				if (typeof northcell !== "undefined") {
+					northcell.setSouth(cell);
+				}
+
+				if (x === this.map.getWidth() - 1) {
+					cell.setEast(cells[y][0]);
+				}
+
+				if (y === this.map.getHeight() - 1) {
+					cell.setSouth(cells[0][x]);
 				}
 			});
 		});

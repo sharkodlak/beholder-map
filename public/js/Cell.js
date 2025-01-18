@@ -64,7 +64,7 @@ class Cell {
 			return;
 		}
 
-		Party.place(this.domElement);
+		Party.place(this);
 	}
 
 	setSouth(cell) {
