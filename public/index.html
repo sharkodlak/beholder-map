@@ -22,9 +22,6 @@
 			for (const [elementId, map] of Object.entries(maps)) {
 				previousLevel = await loadAndDisplay(map, elementId, previousLevel);
 			}
-
-			document.addEventListener('keydown', Mapper.onKeyDown);
-			document.addEventListener('keyup', Mapper.onKeyUp);
 		}
 
 		async function loadAndDisplay(map, elementId, previousLevel) {

@@ -55,13 +55,6 @@ class Mapper {
 		}
 	};
 
-	static keyToDirection = {
-		"ArrowUp": "north",
-		"ArrowDown": "south",
-		"ArrowLeft": "west",
-		"ArrowRight": "east"
-	};
-
 	static directionToDelta = {
 		"north": { x: 0, y: -1 },
 		"south": { x: 0, y: 1 },
@@ -80,25 +73,7 @@ class Mapper {
 
 	static usedByParty;
 
-	static pressedKeys = new Set();
-
-	static onKeyDown(event) {
-		if (Mapper.pressedKeys.has(event.key)) {
-			return;
-		}
-
-		const direction = Mapper.keyToDirection[event.key];
-
-		if (direction) {
-			Mapper.moveParty(direction);
-		}
-
-		Mapper.pressedKeys.add(event.key);
-	}
-
-	static onKeyUp(event) {
-		Mapper.pressedKeys.delete(event.key);
-	}
+	
 
 	static moveParty(direction) {
 		const partyElement = document.getElementById("party");

@@ -1,3 +1,4 @@
+import { Keyboard as KeyboardControls } from './Controls/Keyboard.js';
 import { Mouse as MouseControls } from './Controls/Mouse.js';
 
 
@@ -13,10 +14,12 @@ class Controls {
 	}
 
 	constructor() {
+		this.keyboardControls = new KeyboardControls();
 		this.mouseControls = new MouseControls();
 	}
 
 	initializeForMap(DOMmap) {
+		this.keyboardControls.initializeForMap(DOMmap);
 		this.mouseControls.initializeForMap(DOMmap);
 	}
 }

@@ -14,15 +14,24 @@ class Direction {
 		Direction.EAST
 	]);
 
-	static pool = new Map();
+	static initial = Direction.get(Direction.SOUTH);
 
-	static initialize() {
-		Direction.validDirections.forEach((direction) => {
-			Direction.pool.set(direction, new Direction(direction));
-		});
+	static pool;
+
+	static get(direction) {
+		return Direction.initialize().get(direction);
 	}
 
-	static initial = Direction.pool.get(Direction.SOUTH);
+	static initialize() {
+		if (!Direction.pool) {
+			Direction.pool = new Map();
+			Direction.validDirections.forEach((direction) => {
+				Direction.pool.set(direction, new Direction(direction));
+			});
+		}
+
+		return Direction.pool;
+	}
 
 	direction;
 
@@ -39,14 +48,18 @@ class Direction {
 	}
 
 	step(step) {
-		switch (step) {
-			case Step.TURN_LEFT:
-				return this.turnLeft();
-			case Step.TURN_RIGHT:
-				return this.turnRight();
-			default:
-				return this;
+		if (step instanceof Step) {
+			switch (step) {
+				case Step.TURN_LEFT:
+					return this.turnLeft();
+				case Step.TURN_RIGHT:
+					return this.turnRight();
+			}
 		}
+
+		// move party position
+
+		return this;
 	}
 
 	turnLeft() {

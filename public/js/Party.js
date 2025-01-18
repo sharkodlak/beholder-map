@@ -18,6 +18,10 @@ class Party {
 		Party.instance.reset(DOMcell, direction);
 	}
 
+	static step(step) {
+		Party.instance.step(step);
+	}
+
 	constructor(DOMcell, direction) {
 		if (Party.instance) {
 			throw new Error('Only one instance of party is possible.');
@@ -51,15 +55,15 @@ class Party {
 		return this.direction;
 	}
 
-	step(step) {
-		this.direction = this.direction.step(step);
-	}
-
 	reset(DOMcell, direction) {
 		this.DOMcell.removeChild(this.DOMelement);
 		this.DOMcell = DOMcell;
 		this.direction = direction || this.direction;
 		DOMcell.appendChild(this.DOMelement);
+	}
+
+	step(step) {
+		this.direction = this.direction.step(step);
 	}
 }
 
