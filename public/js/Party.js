@@ -5,46 +5,51 @@ import { Step } from './Step.js';
 class Party {
 	static instance = null;
 
-	mapper;
+	cell;
 	direction;
-	DOMcell;
-	DOMelement;
+	domElement;
+	mapper;
 
-	static place(DOMcell, direction) {
+	static move(direction) {
+		Party.instance.move(direction);
+	}
+
+	static place(cell, direction) {
 		if (!Party.instance) {
-			return new Party(DOMcell, direction);
+			return new Party(cell, direction);
 		}
 
-		Party.instance.reset(DOMcell, direction);
+		Party.instance.reset(cell, direction);
 	}
 
 	static step(step) {
 		Party.instance.step(step);
 	}
 
-	constructor(DOMcell, direction) {
+	constructor(cell, direction) {
 		if (Party.instance) {
 			throw new Error('Only one instance of party is possible.');
 		}
 
+		const domCell = cell.getDomElement();
 		this.initialize();
-		this.mapper = DOMcell.parentElement.parentElement.mapper;
-		this.DOMcell = DOMcell;
+		this.cell = cell;
 		this.direction = direction || Direction.initial;
+		this.mapper = domCell.parentElement.parentElement.mapper;
 
 		Party.instance = this;
-		DOMcell.appendChild(this.DOMelement);
+		domCell.appendChild(this.domElement);
 	}
 
 	initialize() {
-		let DOMelement = document.getElementById("party");
+		let domElement = document.getElementById("party");
 
-		if (!DOMelement) {
-			DOMelement = document.createElement("div");
-			DOMelement.id = "party";
+		if (!domElement) {
+			domElement = document.createElement("div");
+			domElement.id = "party";
 		}
 
-		this.DOMelement = DOMelement;
+		this.domElement = domElement;
 	}
 
 	getCell() {
@@ -55,11 +60,19 @@ class Party {
 		return this.direction;
 	}
 
-	reset(DOMcell, direction) {
-		this.DOMcell.removeChild(this.DOMelement);
-		this.DOMcell = DOMcell;
+	move(direction) {
+		this.direction = direction;
+		const destinationCell = this.cell.getRelative(direction.getDeltaX(), direction.getDeltaY());
+		destinationCell.placeParty();
+	}
+
+	reset(cell, direction) {
+		const previousDomCell = this.cell.getDomElement();
+		previousDomCell.removeChild(this.domElement);
+		this.cell = cell;
 		this.direction = direction || this.direction;
-		DOMcell.appendChild(this.DOMelement);
+		const domCell = cell.getDomElement();
+		domCell.appendChild(this.domElement);
 	}
 
 	step(step) {

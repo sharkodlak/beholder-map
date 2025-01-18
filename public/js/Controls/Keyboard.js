@@ -1,16 +1,23 @@
-import { Party } from '../Party.js';
 import { Direction } from '../Direction.js';
+import { Party } from '../Party.js';
+import { Step } from '../Step.js';
 
 
 class Keyboard {
 	static pressedKeys = new Set();
 
-	static keyToDirection = {
+	static knownKeys = {
 		"ArrowUp": Direction.get(Direction.NORTH),
 		"ArrowDown": Direction.get(Direction.SOUTH),
 		"ArrowLeft": Direction.get(Direction.WEST),
 		"ArrowRight": Direction.get(Direction.EAST),
-	};
+		"9": Step.get(Step.TURN_RIGHT),
+		"8": Step.get(Step.FORWARD),
+		"7": Step.get(Step.TURN_LEFT),
+		"6": Step.get(Step.STRAFE_RIGHT),
+		"5": Step.get(Step.BACKWARD),
+		"4": Step.get(Step.STRAFE_LEFT),
+	}
 
 	constructor() {
 		document.addEventListener('keydown', this.onKeyDown.bind(this));
@@ -22,10 +29,13 @@ class Keyboard {
 			return;
 		}
 
-		const direction = Keyboard.keyToDirection[event.key];
+		const keyValue = Keyboard.knownKeys[event.key];
 
-		if (direction) {
-			Party.step(direction);
+		if (keyValue instanceof Step) {
+			Party.step(keyValue);
+		}
+		if (keyValue instanceof Direction) {
+			Party.move(keyValue);
 		}
 
 		Keyboard.pressedKeys.add(event.key);

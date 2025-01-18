@@ -14,6 +14,20 @@ class Direction {
 		Direction.EAST
 	]);
 
+	static deltaX = {
+		[Direction.NORTH]: 0,
+		[Direction.SOUTH]: 0,
+		[Direction.WEST]: -1,
+		[Direction.EAST]: 1
+	};
+
+	static deltaY = {
+		[Direction.NORTH]: -1,
+		[Direction.SOUTH]: 1,
+		[Direction.WEST]: 0,
+		[Direction.EAST]: 0
+	};
+
 	static initial = Direction.get(Direction.SOUTH);
 
 	static pool;
@@ -47,6 +61,14 @@ class Direction {
 		return this.direction;
 	}
 
+	getDeltaX() {
+		return Direction.deltaX[this.direction];
+	}
+
+	getDeltaY() {
+		return Direction.deltaY[this.direction];
+	}
+
 	step(step) {
 		if (step instanceof Step) {
 			switch (step) {
@@ -56,8 +78,6 @@ class Direction {
 					return this.turnRight();
 			}
 		}
-
-		// move party position
 
 		return this;
 	}

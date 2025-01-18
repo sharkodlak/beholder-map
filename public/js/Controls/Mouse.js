@@ -28,7 +28,7 @@ class Mouse {
 	}
 
 	getCell(event) {
-		return event.target.closest("td");
+		return event.target.closest("td").cell;
 	}
 }
 

@@ -1,10 +1,8 @@
-import { Controls } from "./Controls.js";
-import { GameMap } from "./GameMap.js";
-import { Party } from "./Party.js";
+import { Cell } from "./Cell.js";
 
 
 class Mapper {
-	static items = {
+	static blocks = {
 		"^": "start",
 		"#": "block",
 		"=": "imaginary block",
@@ -43,39 +41,23 @@ class Mapper {
 	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*";
 
 	static cellCreator = {
-		"ceiling hole": (cellElement) => {
-			const holeElement = document.createElement("div");
-			holeElement.className = "ceiling hole";
-			cellElement.appendChild(holeElement);
+		"ceiling hole": (domCell) => {
+			const domHole = document.createElement("div");
+			domHole.className = "ceiling hole";
+			domCell.appendChild(domHole);
 		},
-		"stairs": (cellElement) => {
-			const stairsElement = document.createElement("div");
-			stairsElement.className = "stairs";
-			cellElement.appendChild(stairsElement);
+		"stairs": (domCell) => {
+			const domStairs = document.createElement("div");
+			domStairs.className = "stairs";
+			domCell.appendChild(domStairs);
 		}
 	};
 
-	static directionToDelta = {
-		"north": { x: 0, y: -1 },
-		"south": { x: 0, y: 1 },
-		"west": { x: -1, y: 0 },
-		"east": { x: 1, y: 0 }
-	};
+	static isPassable(block) {
+		return Mapper.passableBlocks.includes(block);
+	}
 
-	static keyToRelativeDirection = {
-		"9": "turn-right",
-		"8": "forward",
-		"7": "turn-left",
-		"6": "strafe-right",
-		"5": "backward",
-		"4": "strafe-left"
-	};
-
-	static usedByParty;
-
-	
-
-	static moveParty(direction) {
+	getRelativeCell(x,y) {
 		const partyElement = document.getElementById("party");
 
 		if (!partyElement) {
@@ -126,66 +108,53 @@ class Mapper {
 	}
 
 	generateMap(elementId) {
-		const mapElement = document.getElementById(elementId);
-		mapElement.mapper = this;
+		const domMap = document.getElementById(elementId);
+		domMap.mapper = this;
 		this.map.forEach((row, y) => {
-			const rowElement = document.createElement("tr");
-			mapElement.appendChild(rowElement);
+			const domRow = document.createElement("tr");
+			domMap.appendChild(domRow);
+			let cell = undefined;
+			let westcell = undefined;
 
-			row.forEach((item, x) => {
-				const cellElement = document.createElement("td");
+			row.forEach((block, x) => {
+				const domCell = document.createElement("td");
 
 				if (x < row.firstBlockPosition || x > row.lastBlockPosition) {
-					item = "+";
+					block = "+";
 				}
 
-				if (item in Mapper.items) {
-					const divElement = document.createElement("div");
-					const longName = Mapper.items[item];
+				if (block in Mapper.blocks) {
+					const domDiv = document.createElement("div");
+					const longName = Mapper.blocks[block];
 					const creatorKey = Object.keys(Mapper.cellCreator).find((key) => longName.indexOf(key) !== -1);
-					cellElement.appendChild(divElement);
-					cellElement.className = longName;
+					domCell.appendChild(domDiv);
+					domCell.className = longName;
 
 					if (creatorKey) {
-						Mapper.cellCreator[creatorKey](cellElement);
+						Mapper.cellCreator[creatorKey](domCell);
 					}
 				}
 
 				for (const [stair, value] of Object.entries(this.map.stairs)) {
 					if (value[0] === x && value[1] === y) {
-						const stairLabelElement = document.createElement("span");
-						stairLabelElement.textContent = stair;
-						cellElement.appendChild(stairLabelElement);
+						const domStairLabel = document.createElement("span");
+						domStairLabel.textContent = stair;
+						domCell.appendChild(domStairLabel);
 					}
 				}
 
-				rowElement.appendChild(cellElement);
+				domRow.appendChild(domCell);
+
+				westcell = cell;
+				cell = new Cell(block, domCell, x, y);
+
+				if (typeof westcell !== "undefined") {
+					westcell.setEast(cell);
+				}
 			});
 		});
 
-		return mapElement;
-	}
-
-	placeParty(cell) {
-		if (!this.isPassable(cell)) {
-			return;
-		}
-
-		Party.place(cell);
-	}
-
-	isPassable(cell) {
-		const cellCoordinates = this.getCellCoordinates(cell);
-		const block = this.map.getCell(cellCoordinates.x, cellCoordinates.y);
-
-		return Mapper.passableBlocks.includes(block);
-	}
-
-	getCellCoordinates(cell) {
-		const x = cell.cellIndex;
-		const y = cell.parentElement.rowIndex;
-
-		return { x, y };
+		return domMap;
 	}
 
 	getCellElement(cell, deltaX, deltaY) {
@@ -197,10 +166,10 @@ class Mapper {
 			deltaY = 0;
 		}
 
-		const mapElement = cell.parentElement.parentElement;
+		const domMap = cell.parentElement.parentElement;
 		const x = ((cell.cellIndex + deltaX) % this.map.getWidth() + this.map.getWidth()) % this.map.getWidth();
 		const y = ((cell.parentElement.rowIndex + deltaY) % this.map.getHeight() + this.map.getHeight()) % this.map.getHeight();
-		const destinationRow = mapElement.children[y];
+		const destinationRow = domMap.children[y];
 
 		return destinationRow.children[x];
 	}

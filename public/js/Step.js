@@ -17,10 +17,19 @@ class Step {
 
 	static pool = new Map();
 
+	static get(step) {
+		return Step.initialize().get(step);
+	}
+
 	static initialize() {
-		Step.validSteps.forEach((step) => {
-			Step.pool.set(step, new Step(step));
-		});
+		if (!Step.pool) {
+			Step.pool = new Map();
+			Step.validSteps.forEach((step) => {
+				Step.pool.set(step, new Step(step));
+			});
+		}
+
+		return Step.pool;
 	}
 
 	step;
