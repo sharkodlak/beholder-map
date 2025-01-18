@@ -1,6 +1,7 @@
 class GameMap {
 	map;
 	stairs;
+	teleports;
 
 	static async load(file) {
 		const response = await fetch(file);
@@ -12,6 +13,7 @@ class GameMap {
 		const stairs = {};
 		const lines = mapText.split("\n");
 		let isReadingMap = true;
+		let structuresSource = '';
 
 		lines.forEach((line, y) => {
 			if (line === "") {
@@ -36,18 +38,19 @@ class GameMap {
 					map[y][x] = char;
 				}
 			} else {
-				const stair = line[0];
-				const [x, y] = line.slice(2).split(", ").map(Number);
-				stairs[stair] = [x, y];
+				structuresSource += line + "\n";
 			}
 		});
 
-		return new GameMap(map, stairs);
+		const structures = JSON.parse(structuresSource);
+
+		return new GameMap(map, structures.stairs, structures.teleports);
 	}
 
-	constructor(map, stairs) {
+	constructor(map, stairs, teleports) {
 		this.map = map;
 		this.stairs = stairs;
+		this.teleports = teleports || {};
 	}
 
 	forEach(callback) {
