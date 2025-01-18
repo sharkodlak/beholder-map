@@ -1,3 +1,4 @@
+import { Controls } from "./Controls.js";
 import { GameMap } from "./GameMap.js";
 import { Party } from "./Party.js";
 
@@ -140,7 +141,7 @@ class Mapper {
 	previousLevel;
 	nextLevel;
 
-	constructor(map, previousLevel, nextLevel) {
+	constructor(map, previousLevel) {
 		this.map = map;
 		this.previousLevel = previousLevel;
 	}
@@ -152,8 +153,6 @@ class Mapper {
 	generateMap(elementId) {
 		const mapElement = document.getElementById(elementId);
 		mapElement.mapper = this;
-		mapElement.addEventListener("click", this.onCellClick.bind(this));
-		mapElement.addEventListener("mousedown", this.onCellMouseDown.bind(this));
 		this.map.forEach((row, y) => {
 			const rowElement = document.createElement("tr");
 			mapElement.appendChild(rowElement);
@@ -188,28 +187,9 @@ class Mapper {
 				rowElement.appendChild(cellElement);
 			});
 		});
+
+		return mapElement;
 	}
-
-	onCellClick(event) {
-		const cell = event.target.closest("td");
-
-		if (cell) {
-			this.placeParty(cell);
-		}
-	}
-
-	onCellMouseDown(event) {
-		const cell = event.target.closest("td");
-
-		if (!cell) {
-			return;
-		}
-
-		if (event.button === 1) {
-			console.log(this.getCellCoordinates(cell));
-		}
-	}
-
 
 	placeParty(cell) {
 		if (!this.isPassable(cell)) {

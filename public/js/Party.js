@@ -54,6 +54,13 @@ class Party {
 	step(step) {
 		this.direction = this.direction.step(step);
 	}
+
+	reset(DOMcell, direction) {
+		this.DOMcell.removeChild(this.DOMelement);
+		this.DOMcell = DOMcell;
+		this.direction = direction || this.direction;
+		DOMcell.appendChild(this.DOMelement);
+	}
 }
 
 export { Party };

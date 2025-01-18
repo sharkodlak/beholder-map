@@ -5,8 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="module" src="js/Mapper.js"></script>
 	<script type="module">
+		import { Controls } from "./js/Controls.js";
 		import { GameMap } from "./js/GameMap.js";
 		import { Mapper } from "./js/Mapper.js";
+
+		const controls = Controls.initialize();
 
 		async function initialize() {
 			const maps = {
@@ -33,7 +36,8 @@
 				previousLevel.setNextLevel(mapper);
 			}
 
-			mapper.generateMap(elementId);
+			const DOMmap = mapper.generateMap(elementId);
+			controls.initializeForMap(DOMmap);
 			return mapper;
 		}
 
