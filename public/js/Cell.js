@@ -26,30 +26,61 @@ class Cell {
 	}
 
 	getRelative(deltaX, deltaY) {
-		if (deltaX === 0 && deltaY === 0) {
-			return this;
-		}
+		deltaX = parseInt(deltaX);
+		deltaY = parseInt(deltaY);
 
 		let cell = this;
 
 		if (deltaX > 0) {
-			while (deltaX--) {
-				cell = cell.east;
-			}
+			cell = cell.getEast(deltaX);
 		} else if (deltaX < 0) {
-			while (deltaX++) {
-				cell = cell.west;
-			}
+			cell = cell.getWest(-deltaX);
 		}
 
 		if (deltaY > 0) {
-			while (deltaY--) {
-				cell = cell.south;
-			}
+			cell = cell.getSouth(deltaY);
 		} else if (deltaY < 0) {
-			while (deltaY++) {
-				cell = cell.north;
-			}
+			cell = cell.getNorth(-deltaY);
+		}
+
+		return cell;
+	}
+
+	getNorth(delta) {
+		let cell = this;
+
+		while (delta--) {
+			cell = cell.north;
+		}
+
+		return cell;
+	}
+
+	getWest(delta) {
+		let cell = this;
+
+		while (delta--) {
+			cell = cell.west;
+		}
+
+		return cell;
+	}
+
+	getEast(delta) {
+		let cell = this;
+
+		while (delta--) {
+			cell = cell.east;
+		}
+
+		return cell;
+	}
+
+	getSouth(delta) {
+		let cell = this;
+
+		while (delta--) {
+			cell = cell.south;
 		}
 
 		return cell;

@@ -57,43 +57,6 @@ class Mapper {
 		return Mapper.passableBlocks.includes(block);
 	}
 
-	getRelativeCell(x,y) {
-		const partyElement = document.getElementById("party");
-
-		if (!partyElement) {
-			return;
-		}
-
-		partyElement.className = direction;
-		const cell = partyElement.parentElement;
-		let deltaX;
-		let deltaY;
-
-		switch (direction) {
-			case "north":
-				deltaY = -1;
-				break;
-			case "south":
-				deltaY = 1;
-				break;
-			case "west":
-				deltaX = -1;
-				break;
-			case "east":
-				deltaX = 1;
-				break;
-		}
-
-		const newCell = Mapper.usedByParty.getCellElement(cell, deltaX, deltaY);
-
-		if (!Mapper.usedByParty.isPassable(newCell)) {
-			return;
-		}
-
-		partyElement.remove();
-		newCell.appendChild(partyElement);
-	}
-
 	map;
 	previousLevel;
 	nextLevel;
@@ -169,23 +132,6 @@ class Mapper {
 		});
 
 		return domMap;
-	}
-
-	getCellElement(cell, deltaX, deltaY) {
-		if (deltaX === undefined) {
-			deltaX = 0;
-		}
-
-		if (deltaY === undefined) {
-			deltaY = 0;
-		}
-
-		const domMap = cell.parentElement.parentElement;
-		const x = ((cell.cellIndex + deltaX) % this.map.getWidth() + this.map.getWidth()) % this.map.getWidth();
-		const y = ((cell.parentElement.rowIndex + deltaY) % this.map.getHeight() + this.map.getHeight()) % this.map.getHeight();
-		const destinationRow = domMap.children[y];
-
-		return destinationRow.children[x];
 	}
 }
 
