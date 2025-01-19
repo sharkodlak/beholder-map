@@ -156,7 +156,8 @@ td {
 }
 
 .stairs.up.north > .stairs {
-	bottom: 75%;
+	transform: rotate(180deg);
+	top: 75%;
 }
 
 .stairs.up.west > .stairs {
@@ -170,8 +171,7 @@ td {
 }
 
 .stairs.up.south > .stairs {
-	transform: rotate(180deg);
-	top: 75%;
+	bottom: 75%;
 }
 
 .stairs > span {

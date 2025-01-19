@@ -133,6 +133,10 @@ class Mapper {
 
 		return domMap;
 	}
+
+	generateStairs(cell) {
+		
+	}
 }
 
 export { Mapper };
