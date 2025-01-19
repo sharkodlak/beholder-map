@@ -49,9 +49,9 @@ class Step {
 			case Step.BACKWARD:
 				return -direction.getDeltaX();
 			case Step.STRAFE_LEFT:
-				return -direction.getDeltaY();
-			case Step.STRAFE_RIGHT:
 				return direction.getDeltaY();
+			case Step.STRAFE_RIGHT:
+				return -direction.getDeltaY();
 		}
 
 		return 0;
@@ -64,9 +64,9 @@ class Step {
 			case Step.BACKWARD:
 				return -direction.getDeltaY();
 			case Step.STRAFE_LEFT:
-				return direction.getDeltaX();
-			case Step.STRAFE_RIGHT:
 				return -direction.getDeltaX();
+			case Step.STRAFE_RIGHT:
+				return direction.getDeltaX();
 		}
 
 		return 0;

@@ -10,6 +10,10 @@ class Party {
 	domElement;
 	mapper;
 
+	static get() {
+		return Party.instance;
+	}
+
 	static move(direction) {
 		Party.instance.move(direction);
 	}
@@ -32,10 +36,10 @@ class Party {
 		}
 
 		const domCell = cell.getDomElement();
-		this.initialize();
 		this.cell = cell;
 		this.direction = direction || Direction.initial;
 		this.mapper = domCell.parentElement.parentElement.mapper;
+		this.initialize();
 
 		Party.instance = this;
 		domCell.appendChild(this.domElement);
@@ -47,6 +51,7 @@ class Party {
 		if (!domElement) {
 			domElement = document.createElement("div");
 			domElement.id = "party";
+			domElement.className = this.direction.getDirection();
 		}
 
 		this.domElement = domElement;
@@ -66,10 +71,9 @@ class Party {
 	}
 
 	reset(cell, direction) {
-		const previousDomCell = this.cell.getDomElement();
-		previousDomCell.removeChild(this.domElement);
 		this.cell = cell;
 		this.direction = direction || this.direction;
+		this.domElement.className = this.direction.getDirection();
 		const domCell = cell.getDomElement();
 		domCell.appendChild(this.domElement);
 	}
@@ -80,5 +84,7 @@ class Party {
 		destinationCell.placeParty();
 	}
 }
+
+globalThis.Party = Party;
 
 export { Party };
