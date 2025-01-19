@@ -72,9 +72,9 @@ class Direction {
 	step(step) {
 		if (step instanceof Step) {
 			switch (step) {
-				case Step.TURN_LEFT:
+				case Step.get(Step.TURN_LEFT):
 					return this.turnLeft();
-				case Step.TURN_RIGHT:
+				case Step.get(Step.TURN_RIGHT):
 					return this.turnRight();
 			}
 		}
@@ -83,28 +83,28 @@ class Direction {
 	}
 
 	turnLeft() {
-		switch (this) {
-			case Direction.pool.get(Direction.NORTH):
-				return Direction.pool.get(Direction.WEST);
-			case Direction.pool.get(Direction.WEST):
-				return Direction.pool.get(Direction.SOUTH);
-			case Direction.pool.get(Direction.SOUTH):
-				return Direction.pool.get(Direction.EAST);
-			case Direction.pool.get(Direction.EAST):
-				return Direction.pool.get(Direction.NORTH);
+		switch (this.direction) {
+			case Direction.NORTH:
+				return Direction.get(Direction.WEST);
+			case Direction.WEST:
+				return Direction.get(Direction.SOUTH);
+			case Direction.SOUTH:
+				return Direction.get(Direction.EAST);
+			case Direction.EAST:
+				return Direction.get(Direction.NORTH);
 		}
 	}
 
 	turnRight() {
-		switch (this) {
-			case Direction.pool.get(Direction.NORTH):
-				return Direction.pool.get(Direction.EAST);
-			case Direction.pool.get(Direction.EAST):
-				return Direction.pool.get(Direction.SOUTH);
-			case Direction.pool.get(Direction.SOUTH):
-				return Direction.pool.get(Direction.WEST);
-			case Direction.pool.get(Direction.WEST):
-				return Direction.pool.get(Direction.NORTH);
+		switch (this.direction) {
+			case Direction.NORTH:
+				return Direction.get(Direction.EAST);
+			case Direction.EAST:
+				return Direction.get(Direction.SOUTH);
+			case Direction.SOUTH:
+				return Direction.get(Direction.WEST);
+			case Direction.WEST:
+				return Direction.get(Direction.NORTH);
 		}
 	}
 }

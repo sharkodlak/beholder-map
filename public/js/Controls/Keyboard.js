@@ -11,12 +11,12 @@ class Keyboard {
 		"ArrowDown": Direction.get(Direction.SOUTH),
 		"ArrowLeft": Direction.get(Direction.WEST),
 		"ArrowRight": Direction.get(Direction.EAST),
-		"9": Step.get(Step.TURN_RIGHT),
-		"8": Step.get(Step.FORWARD),
-		"7": Step.get(Step.TURN_LEFT),
-		"6": Step.get(Step.STRAFE_RIGHT),
-		"5": Step.get(Step.BACKWARD),
-		"4": Step.get(Step.STRAFE_LEFT),
+		"Numpad4": Step.get(Step.STRAFE_LEFT),
+		"Numpad5": Step.get(Step.BACKWARD),
+		"Numpad6": Step.get(Step.STRAFE_RIGHT),
+		"Numpad7": Step.get(Step.TURN_LEFT),
+		"Numpad8": Step.get(Step.FORWARD),
+		"Numpad9": Step.get(Step.TURN_RIGHT),
 	}
 
 	constructor() {
@@ -29,7 +29,7 @@ class Keyboard {
 			return;
 		}
 
-		const keyValue = Keyboard.knownKeys[event.key];
+		const keyValue = Keyboard.knownKeys[event.code];
 
 		if (keyValue instanceof Step) {
 			Party.step(keyValue);

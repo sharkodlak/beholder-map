@@ -61,7 +61,6 @@ class Party {
 	}
 
 	move(direction) {
-		this.direction = direction;
 		const destinationCell = this.cell.getRelative(direction.getDeltaX(), direction.getDeltaY());
 		destinationCell.placeParty();
 	}
@@ -77,6 +76,8 @@ class Party {
 
 	step(step) {
 		this.direction = this.direction.step(step);
+		const destinationCell = this.cell.getRelative(step.getDeltaX(this.direction), step.getDeltaY(this.direction));
+		destinationCell.placeParty();
 	}
 }
 

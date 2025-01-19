@@ -15,7 +15,7 @@ class Step {
 		Step.TURN_RIGHT
 	]);
 
-	static pool = new Map();
+	static pool;
 
 	static get(step) {
 		return Step.initialize().get(step);
@@ -40,6 +40,36 @@ class Step {
 		}
 
 		this.step = step;
+	}
+
+	getDeltaX(direction) {
+		switch (this.step) {
+			case Step.FORWARD:
+				return direction.getDeltaX();
+			case Step.BACKWARD:
+				return -direction.getDeltaX();
+			case Step.STRAFE_LEFT:
+				return -direction.getDeltaY();
+			case Step.STRAFE_RIGHT:
+				return direction.getDeltaY();
+		}
+
+		return 0;
+	}
+
+	getDeltaY(direction) {
+		switch (this.step) {
+			case Step.FORWARD:
+				return direction.getDeltaY();
+			case Step.BACKWARD:
+				return -direction.getDeltaY();
+			case Step.STRAFE_LEFT:
+				return direction.getDeltaX();
+			case Step.STRAFE_RIGHT:
+				return -direction.getDeltaX();
+		}
+
+		return 0;
 	}
 
 	getStep() {
