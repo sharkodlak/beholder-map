@@ -49,6 +49,14 @@ td {
 	transform: rotate(180deg);
 }
 
+.cleric {
+	background-color: #9Fc;
+}
+
+.cleric::after {
+	content: "cleric";
+}
+
 .door::before {
 	content: "";
 	position: absolute;

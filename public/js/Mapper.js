@@ -26,6 +26,7 @@ class Mapper {
 		"̷": "niche east",
 		"̅ ": "niche south",
 		"*": "teleport",
+		"☥": "dvarwen cleric",
 		// For understanding following numbers consider player on number 5
 		"9": "north stairs up",
 		"8": "north stairs down",
@@ -46,7 +47,7 @@ class Mapper {
 		"Ⅷ": "ancient portal stone-VIII",
 	};
 
-	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*";
+	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*☥";
 
 	static cellCreator = {
 		"ceiling hole": (domCell) => {
