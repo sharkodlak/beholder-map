@@ -123,6 +123,19 @@ td {
 	transform: rotate(180deg);
 }
 
+.portal {
+	background-color: #99F;
+}
+
+.portal > span,
+.stairs > span {
+	display: block;
+	position: relative;
+	text-align: center;
+	font-size: 2.5vmin;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
 .pressure-plate {
 	background-image: url('../img/css/pressure-plate.svg');
 	background-size: 100% 100%;
@@ -172,14 +185,6 @@ td {
 
 .stairs.up.south > .stairs {
 	bottom: 75%;
-}
-
-.stairs > span {
-	display: block;
-	position: relative;
-	text-align: center;
-	font-size: 2.5vmin;
-	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
 }
 
 .teleport {

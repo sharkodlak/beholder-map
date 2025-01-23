@@ -36,6 +36,14 @@ class Mapper {
 		"3": "east stairs up",
 		"2": "south stairs down",
 		"1": "south stairs up",
+		"Ⅰ": "ancient portal stone-I",
+		"Ⅱ": "ancient portal stone-II",
+		"Ⅲ": "ancient portal stone-III",
+		"Ⅳ": "ancient portal stone-IV",
+		"Ⅴ": "ancient portal stone-V",
+		"Ⅵ": "ancient portal stone-VI",
+		"Ⅶ": "ancient portal stone-VII",
+		"Ⅷ": "ancient portal stone-VIII",
 	};
 
 	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*";
@@ -98,11 +106,19 @@ class Mapper {
 					}
 				}
 
-				for (const [stair, value] of Object.entries(this.map.stairs)) {
+				for (const [portalNumber, portal] of Object.entries(this.map.portals || {})) {
+					if (portal.position[0] === x && portal.position[1] === y) {
+						const domLabel = document.createElement("span");
+						domLabel.textContent = portalNumber;
+						domCell.appendChild(domLabel);
+					}
+				}
+
+				for (const [stairsCharacter, value] of Object.entries(this.map.stairs)) {
 					if (value[0] === x && value[1] === y) {
-						const domStairLabel = document.createElement("span");
-						domStairLabel.textContent = stair;
-						domCell.appendChild(domStairLabel);
+						const domLabel = document.createElement("span");
+						domLabel.textContent = stairsCharacter;
+						domCell.appendChild(domLabel);
 					}
 				}
 
@@ -135,7 +151,7 @@ class Mapper {
 	}
 
 	generateStairs(cell) {
-		
+
 	}
 }
 

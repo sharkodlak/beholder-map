@@ -1,5 +1,6 @@
 class GameMap {
 	map;
+	portals;
 	stairs;
 	teleports;
 
@@ -44,13 +45,14 @@ class GameMap {
 
 		const structures = JSON.parse(structuresSource);
 
-		return new GameMap(map, structures.stairs, structures.teleports);
+		return new GameMap(map, structures);
 	}
 
-	constructor(map, stairs, teleports) {
+	constructor(map, structures) {
 		this.map = map;
-		this.stairs = stairs;
-		this.teleports = teleports || {};
+		this.portals = structures.portals || {};
+		this.stairs = structures.stairs;
+		this.teleports = structures.teleports || {};
 	}
 
 	forEach(callback) {
