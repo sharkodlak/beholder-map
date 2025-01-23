@@ -37,7 +37,10 @@ class Mapper {
 		"3": "east stairs up",
 		"2": "south stairs down",
 		"1": "south stairs up",
-		"Ⅲ": "ancient portal",
+		"⏶": "north ancient portal",
+		"⏴": "west ancient portal",
+		"⏵": "east ancient portal",
+		"⏷": "south ancient portal",
 	};
 
 	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*☥";
