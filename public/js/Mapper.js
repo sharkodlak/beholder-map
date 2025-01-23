@@ -37,14 +37,7 @@ class Mapper {
 		"3": "east stairs up",
 		"2": "south stairs down",
 		"1": "south stairs up",
-		"Ⅰ": "ancient portal stone-I",
-		"Ⅱ": "ancient portal stone-II",
-		"Ⅲ": "ancient portal stone-III",
-		"Ⅳ": "ancient portal stone-IV",
-		"Ⅴ": "ancient portal stone-V",
-		"Ⅵ": "ancient portal stone-VI",
-		"Ⅶ": "ancient portal stone-VII",
-		"Ⅷ": "ancient portal stone-VIII",
+		"Ⅲ": "ancient portal",
 	};
 
 	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*☥";
