@@ -52,8 +52,8 @@ td {
 	transform: rotate(90deg);
 }
 
-.button.south,
-.keyhole.south {
+.button.south > div:first-child,
+.keyhole.south > div:first-child {
 	transform: rotate(180deg);
 }
 

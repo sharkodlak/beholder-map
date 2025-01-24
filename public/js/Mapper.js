@@ -44,7 +44,7 @@ class Mapper {
 		"⏷": "south ancient portal",
 	};
 
-	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*☥";
+	static passableBlocks = " =,.;-|_↑←→↓↕⇧⇦⇨⇩*☥";
 
 	static cellCreator = {
 		"button north south": (domCell) => {
