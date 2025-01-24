@@ -17,6 +17,7 @@ class Mapper {
 		"←": "button west",
 		"→": "button east",
 		"↓": "button south",
+		"↕": "button north south",
 		"⇧": "keyhole north",
 		"⇦": "keyhole west",
 		"⇨": "keyhole east",
@@ -46,6 +47,13 @@ class Mapper {
 	static passableBlocks = " =,.;-|_↑←→↓⇧⇦⇨⇩*☥";
 
 	static cellCreator = {
+		"button north south": (domCell) => {
+			domCell.className = "button north";
+			const domAnotherButton = document.createElement("div");
+			domAnotherButton.className = "button south";
+			domAnotherButton.appendChild(document.createElement("div"));
+			domCell.appendChild(domAnotherButton);
+		},
 		"ceiling hole": (domCell) => {
 			const domHole = document.createElement("div");
 			domHole.className = "ceiling hole";
