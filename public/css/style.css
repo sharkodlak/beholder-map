@@ -88,7 +88,7 @@ td {
 }
 
 .expected {
-	background-color: #aaa;
+	background-color: #999;
 }
 
 .hole.ceiling > .hole.ceiling {
@@ -207,4 +207,8 @@ td {
 	background-color: #dbf;
 	background-image: url('../img/css/teleport.svg');
 	background-size: 100% 100%;
+}
+
+.unknown {
+	background-color: #dfe;
 }
