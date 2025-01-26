@@ -2,48 +2,74 @@ import { Cell } from "./Cell.js";
 
 
 class Mapper {
-	static blocks = {
-		"^": "start",
-		"#": "block",
-		"=": "imaginary block",
-		"+": "expected block",
-		",": "floor hole",
-		".": "ceiling hole",
-		";": "floor ceiling hole",
-		"-": "door east-west",
-		"|": "door north-south",
-		"_": "pressure-plate",
-		"↑": "button north",
-		"←": "button west",
-		"→": "button east",
-		"↓": "button south",
-		"↕": "button north south",
-		"⇧": "keyhole north",
-		"⇦": "keyhole west",
-		"⇨": "keyhole east",
-		"⇩": "keyhole south",
-		"̲": "niche north",
-		"̸": "niche west",
-		"̷": "niche east",
-		"̅ ": "niche south",
-		"*": "teleport",
-		"☥": "dvarwen cleric",
-		"?": "unknown",
+	static blockGroups = {
+		"basic": {
+			" ": "hallway",
+			"_": "pressure-plate",
+			"*": "teleport",
+		},
+		"blocks": {
+			"#": "block",
+			"+": "expected block",
+			"=": "imaginary block",
+			"?": "unknown",
+		},
+		"button": {
+			"↑": "button north",
+			"←": "button west",
+			"→": "button east",
+			"↓": "button south",
+			"↕": "button north south",
+		},
+		"door": {
+			"-": "door east-west",
+			"|": "door north-south",
+		},
+		"hole": {
+			",": "floor hole",
+			".": "ceiling hole",
+			";": "floor ceiling hole",
+		},
+		"keyhole": {
+			"⇧": "keyhole north",
+			"⇦": "keyhole west",
+			"⇨": "keyhole east",
+			"⇩": "keyhole south",
+		},
+		/*
+		"niche": {
+			"̲": "niche north",
+			"̸": "niche west",
+			"̷": "niche east",
+			"̅ ": "niche south",
+		},
+		*/
+		"ancient portal": {
+			"⏶": "north ancient portal",
+			"⏴": "west ancient portal",
+			"⏵": "east ancient portal",
+			"⏷": "south ancient portal",
+		},
 		// For understanding following numbers consider player on number 5
-		"9": "north stairs up",
-		"8": "north stairs down",
-		"7": "west stairs up",
-		"6": "east stairs down",
-		// "5" can be used for something else
-		"4": "west stairs down",
-		"3": "east stairs up",
-		"2": "south stairs down",
-		"1": "south stairs up",
-		"⏶": "north ancient portal",
-		"⏴": "west ancient portal",
-		"⏵": "east ancient portal",
-		"⏷": "south ancient portal",
+		"stairs up": {
+			"9": "north stairs up",
+			"7": "west stairs up",
+			"3": "east stairs up",
+			"1": "south stairs up",
+		},
+		"stairs down": {
+			"8": "north stairs down",
+			"4": "west stairs down",
+			"6": "east stairs down",
+			"2": "south stairs down",
+		},
+		"xtra": {
+			"^": "start",
+			"☥": "dvarwen cleric",
+		},
 	};
+
+	static blocks = Object.assign({}, ...Object.values(Mapper.blockGroups));
 
 	static passableBlocks = " =,.;-|_↑←→↓↕⇧⇦⇨⇩*☥?";
 
@@ -69,6 +95,13 @@ class Mapper {
 
 	static isPassable(block) {
 		return Mapper.passableBlocks.includes(block);
+	}
+
+	static getAvailableBlocks() {
+		const availableBlocks = Object.entries(Mapper.blockGroups).filter(([key, value]) => key !== "xtra").map(([key, value]) => Object.keys(value));
+		const availableBlocksVertical = availableBlocks.map((_, colIndex) => availableBlocks.map(row => row[colIndex])).filter(row => row.some(block => block !== undefined));
+		console.log("Available blocks: ", availableBlocks, availableBlocksVertical);
+		return availableBlocksVertical;
 	}
 
 	map;

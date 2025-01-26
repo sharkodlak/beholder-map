@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Eye of the Beholder: Levels</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -13,22 +14,28 @@
 
 		async function initialize() {
 			const maps = {
-				"level-01": "maps/level-01.txt",
-				"level-02": "maps/level-02.txt",
-				"level-03": "maps/level-03.txt",
-				"level-04": "maps/level-04.txt",
-				"level-05": "maps/level-05.txt",
-				"level-06": "maps/level-06.txt",
-				"level-07": "maps/level-07.txt",
-				"level-08": "maps/level-08.txt",
-				"level-09": "maps/level-09.txt",
-				"level-10": "maps/level-10.txt",
+				// Add timestamt according to file last modification time
+				"level-01": "maps/level-01.txt?2025-01-18T08:00",
+				"level-02": "maps/level-02.txt?2025-01-23T17:38",
+				"level-03": "maps/level-03.txt?2025-01-23T17:41",
+				"level-04": "maps/level-04.txt?2025-01-25T15:48",
+				"level-05": "maps/level-05.txt?2025-01-23T22:45",
+				"level-06": "maps/level-06.txt?2025-01-25T16:46",
+				"level-07": "maps/level-07.txt?2025-01-25T16:48",
+				"level-08": "maps/level-08.txt?2025-01-25T16:48",
+				"level-09": "maps/level-09.txt?2025-01-26T10:52",
+				"level-10": "maps/level-10.txt?2025-01-25T16:51",
 			};
 			let previousLevel;
 
 			for (const [elementId, map] of Object.entries(maps)) {
 				previousLevel = await loadAndDisplay(map, elementId, previousLevel);
 			}
+
+			const availableBlocks = Mapper.getAvailableBlocks();
+			const availableBlocksMap = new GameMap(availableBlocks);
+			const availableBlocksMapper = new Mapper(availableBlocksMap);
+			const DOMmap = availableBlocksMapper.generateMap("available-blocks");
 		}
 
 		async function loadAndDisplay(map, elementId, previousLevel) {
@@ -48,41 +55,43 @@
 		document.addEventListener("DOMContentLoaded", initialize);
 	</script>
 </head>
+
 <body>
 	<h2>Level 01</h2>
-	<table id="level-01"></table>
+	<table id="level-01" class="map"></table>
 
 	<h2>Level 02</h2>
-	<table id="level-02"></table>
+	<table id="level-02" class="map"></table>
 
 	<h2>Level 03</h2>
-	<table id="level-03"></table>
+	<table id="level-03" class="map"></table>
 
 	<h2>Level 04</h2>
-	<table id="level-04"></table>
+	<table id="level-04" class="map"></table>
 
 	<h2>Level 05</h2>
-	<table id="level-05"></table>
+	<table id="level-05" class="map"></table>
 
 	<h2>Level 06</h2>
-	<table id="level-06"></table>
+	<table id="level-06" class="map"></table>
 
 	<h2>Level 07</h2>
-	<table id="level-07"></table>
+	<table id="level-07" class="map"></table>
 
 	<h2>Level 08</h2>
-	<table id="level-08"></table>
+	<table id="level-08" class="map"></table>
 
 	<h2>Level 09</h2>
-	<table id="level-09"></table>
+	<table id="level-09" class="map"></table>
 
 	<h2>Level 10</h2>
-	<table id="level-10"></table>
+	<table id="level-10" class="map"></table>
 
 	<h2>Level 11</h2>
-	<table id="level-11"></table>
+	<table id="level-11" class="map"></table>
 
 	<h2>Level 12</h2>
-	<table id="level-12"></table>
-</body>
+	<table id="level-12" class="map"></table>
 
+	<table id="available-blocks"></table>
+</body>

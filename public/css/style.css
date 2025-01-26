@@ -2,11 +2,15 @@ h2 {
 	text-align: center;
 }
 
-table {
+table.map {
 	width: 99vmin;
 	height: 99vmin;
 	margin: 0 auto;
 	border-collapse: collapse;
+}
+
+#available-blocks {
+	/* display: none; */
 }
 
 td {
@@ -166,40 +170,48 @@ td {
 }
 
 .stairs.down.north > .stairs {
+	left: 0;
 	bottom: -15%;
 }
 
 .stairs.down.east > .stairs {
 	left: -15%;
+	top: 0;
 	transform: rotate(90deg);
 }
 
 .stairs.down.west > .stairs {
 	right: -15%;
+	top: 0;
 	transform: rotate(-90deg);
 }
 
 .stairs.down.south > .stairs {
 	top: -15%;
+	left: 0;
 	transform: rotate(180deg);
 }
 
 .stairs.up.north > .stairs {
-	transform: rotate(180deg);
+	left: 0;
 	top: 75%;
+	transform: rotate(180deg);
 }
 
 .stairs.up.west > .stairs {
-	transform: rotate(90deg);
 	left: 75%;
+	top: 0;
+	transform: rotate(90deg);
 }
 
 .stairs.up.east > .stairs {
-	transform: rotate(-90deg);
 	right: 75%;
+	top: 0;
+	transform: rotate(-90deg);
 }
 
 .stairs.up.south > .stairs {
+	left: 0;
 	bottom: 75%;
 }
 

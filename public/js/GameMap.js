@@ -49,9 +49,10 @@ class GameMap {
 	}
 
 	constructor(map, structures) {
+		structures = structures || {};
 		this.map = map;
 		this.portals = structures.portals || {};
-		this.stairs = structures.stairs;
+		this.stairs = structures.stairs || {};
 		this.teleports = structures.teleports || {};
 	}
 
