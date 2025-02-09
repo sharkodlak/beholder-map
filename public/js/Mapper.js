@@ -6,7 +6,7 @@ class Mapper {
 		"basic": {
 			" ": "hallway",
 			"_": "pressure-plate",
-			"*": "teleport",
+			"*": "teleport visible",
 		},
 		"blocks": {
 			"#": "block",
@@ -158,6 +158,17 @@ class Mapper {
 						const domLabel = document.createElement("span");
 						domLabel.textContent = stairsCharacter;
 						domCell.appendChild(domLabel);
+					}
+				}
+
+				for (const teleportValue of Object.values(this.map.teleports || {})) {
+					if (teleportValue[0] === x && teleportValue[1] === y) {
+						domCell.classList.add("teleport");
+						domCell.title = teleportValue[4];
+					}
+					if (teleportValue[2] === x && teleportValue[3] === y) {
+						domCell.classList.add("teleport-destination");
+						domCell.title = teleportValue[4];
 					}
 				}
 

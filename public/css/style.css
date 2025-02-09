@@ -10,7 +10,7 @@ table.map {
 }
 
 #available-blocks {
-	/* display: none; */
+	display: none;
 }
 
 td {
@@ -215,8 +215,15 @@ td {
 	bottom: 75%;
 }
 
+.teleport-destination {
+	background-color: #edf;
+}
+
 .teleport {
 	background-color: #dbf;
+}
+
+.teleport.visible {
 	background-image: url('../img/css/teleport.svg');
 	background-size: 100% 100%;
 }
