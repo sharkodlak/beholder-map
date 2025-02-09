@@ -161,17 +161,6 @@ class Mapper {
 					}
 				}
 
-				for (const teleportValue of Object.values(this.map.teleports || {})) {
-					if (teleportValue[0] === x && teleportValue[1] === y) {
-						domCell.classList.add("teleport");
-						domCell.title = teleportValue[4];
-					}
-					if (teleportValue[2] === x && teleportValue[3] === y) {
-						domCell.classList.add("teleport-destination");
-						domCell.title = teleportValue[4];
-					}
-				}
-
 				domRow.appendChild(domCell);
 
 				const northcell = cells[y - 1] && cells[y - 1][x];
@@ -195,6 +184,19 @@ class Mapper {
 					cell.setSouth(cells[0][x]);
 				}
 			});
+		});
+
+		this.map.teleports.forEach(([srcX, srcY, dstX, dstY, name]) => {
+			const srcCell = cells[srcY][srcX];
+			const dstCell = cells[dstY][dstX];
+
+			srcCell.domElement.classList.add("teleport");
+			srcCell.domElement.title = name;
+			srcCell.setTeleportDestination(dstCell);
+
+			dstCell.domElement.classList.add("teleport");
+			dstCell.domElement.classList.add("destination");
+			dstCell.domElement.title = name;
 		});
 
 		return domMap;

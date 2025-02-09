@@ -53,7 +53,7 @@ class GameMap {
 		this.map = map;
 		this.portals = structures.portals || {};
 		this.stairs = structures.stairs || {};
-		this.teleports = structures.teleports || {};
+		this.teleports = structures.teleports || [];
 	}
 
 	forEach(callback) {

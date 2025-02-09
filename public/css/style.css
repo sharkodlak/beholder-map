@@ -215,12 +215,27 @@ td {
 	bottom: 75%;
 }
 
-.teleport-destination {
+.teleport {
+	background-color: #dbf;
+}
+
+.teleport::after {
+	content: attr(title);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 0.6em;
+}
+
+.teleport.destination {
 	background-color: #edf;
 }
 
-.teleport {
-	background-color: #dbf;
+.teleport.highlight {
+	border: 1px dashed #96f;
+	background-color: #c9f;
 }
 
 .teleport.visible {

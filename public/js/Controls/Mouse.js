@@ -5,6 +5,8 @@ class Mouse {
 	initializeForMap(DOMmap) {
 		DOMmap.addEventListener('click', this.onClick.bind(this));
 		DOMmap.addEventListener('mousedown', this.onMouseDown.bind(this));
+		DOMmap.addEventListener('mouseover', this.onMouseOver.bind(this));
+		DOMmap.addEventListener('mouseout', this.onMouseOut.bind(this));
 	}
 
 	onClick(event) {
@@ -24,6 +26,34 @@ class Mouse {
 
 		if (event.button === 1) {
 			console.log(cell);
+		}
+	}
+
+	onMouseOver(event) {
+		const cell = this.getCell(event);
+
+		if (cell.domElement.classList.contains("teleport")) {
+			cell.domElement.classList.add("highlight");
+
+			if (cell.teleportDestination) {
+				cell.teleportDestination.domElement.classList.add("highlight");
+			} else {
+				cell.teleportSource.domElement.classList.add("highlight");
+			}
+		}
+	}
+
+	onMouseOut(event) {
+		const cell = this.getCell(event);
+
+		if (cell.domElement.classList.contains("teleport")) {
+			cell.domElement.classList.remove("highlight");
+
+			if (cell.teleportDestination) {
+				cell.teleportDestination.domElement.classList.remove("highlight");
+			} else {
+				cell.teleportSource.domElement.classList.remove("highlight");
+			}
 		}
 	}
 
