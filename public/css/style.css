@@ -27,6 +27,7 @@ td {
 }
 
 .block,
+.portal,
 .stairs {
 	background-color: #888;
 }
@@ -143,8 +144,35 @@ td {
 	transform: rotate(180deg);
 }
 
-.portal {
-	background-color: #99F;
+.portal > div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #77F;
+}
+
+.portal.north > div {
+	height: 50%;
+	top: 50%;
+	background: linear-gradient(to top, #33F, transparent);
+}
+
+.portal.west > div {
+	width: 50%;
+	left: 50%;
+	background: linear-gradient(to left, #33F, transparent);
+}
+
+.portal.east > div {
+	width: 50%;
+	background: linear-gradient(to right, #33F, transparent);
+}
+
+.portal.south > div {
+	height: 50%;
+	background: linear-gradient(to bottom, #33F, transparent);
 }
 
 .portal > span,
