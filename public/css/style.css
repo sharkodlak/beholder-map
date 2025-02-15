@@ -28,7 +28,8 @@ td {
 
 .block,
 .portal,
-.stairs {
+.stairs.up,
+.stairs.down {
 	background-color: #888;
 }
 

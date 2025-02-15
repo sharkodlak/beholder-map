@@ -114,6 +114,11 @@ class Cell {
 		this.destination = cell;
 		cell.sources.push(this);
 	}
+
+	setTwoWayDestination(cell) {
+		this.setDestination(cell);
+		cell.setDestination(this);
+	}
 }
 
 export { Cell };

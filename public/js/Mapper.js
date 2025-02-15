@@ -104,6 +104,7 @@ class Mapper {
 		return availableBlocksVertical;
 	}
 
+	cells;
 	map;
 	previousLevel;
 	nextLevel;
@@ -186,6 +187,8 @@ class Mapper {
 			});
 		});
 
+		this.cells = cells;
+
 		cells.forEach((row, y) => {
 			row.forEach((cell, x) => {
 				if (Object.keys(this.map.holes).length !== 0) {
@@ -201,6 +204,25 @@ class Mapper {
 						dstCell.domElement.classList.add("destination");
 						dstCell.domElement.classList.add("pair");
 						dstCell;
+					}
+				}
+
+				if (Object.keys(this.map.stairs).length !== 0) {
+					if (Mapper.blockGroups["stairs up"][cell.block]) {
+						for (const [stairsCharacter, value] of Object.entries(this.map.stairs)) {
+							if (value[0] === x && value[1] === y) {
+								const lowerStairsCharacter = stairsCharacter.toLowerCase();
+								const stairsMapper = this.map.stairs[lowerStairsCharacter] ? this : this.previousLevel;
+								const [dstX, dstY] = stairsMapper.map.stairs[lowerStairsCharacter];
+								const dstCell = stairsMapper.cells[dstY][dstX];
+
+								cell.domElement.classList.add("pair");
+								cell.setTwoWayDestination(dstCell);
+
+								dstCell.domElement.classList.add("destination");
+								dstCell.domElement.classList.add("pair");
+							}
+						}
 					}
 				}
 			});
