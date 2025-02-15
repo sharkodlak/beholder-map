@@ -186,16 +186,38 @@ class Mapper {
 			});
 		});
 
+		cells.forEach((row, y) => {
+			row.forEach((cell, x) => {
+				if (Object.keys(this.map.holes).length !== 0) {
+					const dstX = x + this.map.holes.offset.x;
+					const dstY = y + this.map.holes.offset.y;
+
+					if (Mapper.blockGroups["hole"][cell.block]?.includes("floor")) {
+						const dstCell = cells[dstY][dstX];
+
+						cell.domElement.classList.add("pair");
+						cell.setDestination(dstCell);
+
+						dstCell.domElement.classList.add("destination");
+						dstCell.domElement.classList.add("pair");
+						dstCell;
+					}
+				}
+			});
+		});
+
 		this.map.teleports.forEach(([srcX, srcY, dstX, dstY, name]) => {
 			const srcCell = cells[srcY][srcX];
 			const dstCell = cells[dstY][dstX];
 
+			srcCell.domElement.classList.add("pair");
 			srcCell.domElement.classList.add("teleport");
 			srcCell.domElement.title = name;
 			srcCell.setDestination(dstCell);
 
-			dstCell.domElement.classList.add("teleport");
 			dstCell.domElement.classList.add("destination");
+			dstCell.domElement.classList.add("pair");
+			dstCell.domElement.classList.add("teleport");
 			dstCell.domElement.title = name;
 		});
 

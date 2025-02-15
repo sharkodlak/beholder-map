@@ -36,7 +36,7 @@ class Mouse {
 			return;
 		}
 
-		if (cell.domElement.classList.contains("teleport")) {
+		if (cell.domElement.classList.contains("pair")) {
 			cell.domElement.classList.add("highlight");
 
 			if (cell.destination) {
@@ -54,7 +54,7 @@ class Mouse {
 			return;
 		}
 
-		if (cell.domElement.classList.contains("teleport")) {
+		if (cell.domElement.classList.contains("pair")) {
 			cell.domElement.classList.remove("highlight");
 
 			if (cell.destination) {

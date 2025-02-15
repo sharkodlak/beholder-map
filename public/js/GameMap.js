@@ -1,4 +1,5 @@
 class GameMap {
+	holes;
 	map;
 	portals;
 	stairs;
@@ -51,6 +52,8 @@ class GameMap {
 	constructor(map, structures) {
 		structures = structures || {};
 		this.map = map;
+
+		this.holes = structures.holes || {};
 		this.portals = structures.portals || {};
 		this.stairs = structures.stairs || {};
 		this.teleports = structures.teleports || [];

@@ -121,6 +121,11 @@ td {
 	background-size: 100% 100%;
 }
 
+.pair.highlight {
+	border: 1px dashed #f96;
+	background-color: #fdc;
+}
+
 #party {
 	position: absolute;
 	top: 0;
