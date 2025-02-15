@@ -192,7 +192,7 @@ class Mapper {
 
 			srcCell.domElement.classList.add("teleport");
 			srcCell.domElement.title = name;
-			srcCell.setTeleportDestination(dstCell);
+			srcCell.setDestination(dstCell);
 
 			dstCell.domElement.classList.add("teleport");
 			dstCell.domElement.classList.add("destination");

@@ -39,10 +39,10 @@ class Mouse {
 		if (cell.domElement.classList.contains("teleport")) {
 			cell.domElement.classList.add("highlight");
 
-			if (cell.teleportDestination) {
-				cell.teleportDestination.domElement.classList.add("highlight");
+			if (cell.destination) {
+				cell.destination.domElement.classList.add("highlight");
 			} else {
-				cell.teleportSources.forEach(teleportSource => teleportSource.domElement.classList.add("highlight"));
+				cell.sources.forEach(source => source.domElement.classList.add("highlight"));
 			}
 		}
 	}
@@ -57,10 +57,10 @@ class Mouse {
 		if (cell.domElement.classList.contains("teleport")) {
 			cell.domElement.classList.remove("highlight");
 
-			if (cell.teleportDestination) {
-				cell.teleportDestination.domElement.classList.remove("highlight");
+			if (cell.destination) {
+				cell.destination.domElement.classList.remove("highlight");
 			} else {
-				cell.teleportSources.forEach(teleportSource => teleportSource.domElement.classList.remove("highlight"));
+				cell.sources.forEach(source => source.domElement.classList.remove("highlight"));
 			}
 		}
 	}
