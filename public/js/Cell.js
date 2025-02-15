@@ -12,7 +12,7 @@ class Cell {
 	east;
 	south;
 	teleportDestination;
-	teleportSource;
+	teleportSources = [];
 
 	constructor(block, domElement, x, y) {
 		this.block = block;
@@ -112,7 +112,7 @@ class Cell {
 
 	setTeleportDestination(cell) {
 		this.teleportDestination = cell;
-		cell.teleportSource = this;
+		cell.teleportSources.push(this);
 	}
 }
 

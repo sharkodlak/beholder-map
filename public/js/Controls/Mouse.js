@@ -32,13 +32,17 @@ class Mouse {
 	onMouseOver(event) {
 		const cell = this.getCell(event);
 
+		if (!cell || !cell.domElement) {
+			return;
+		}
+
 		if (cell.domElement.classList.contains("teleport")) {
 			cell.domElement.classList.add("highlight");
 
 			if (cell.teleportDestination) {
 				cell.teleportDestination.domElement.classList.add("highlight");
 			} else {
-				cell.teleportSource.domElement.classList.add("highlight");
+				cell.teleportSources.forEach(teleportSource => teleportSource.domElement.classList.add("highlight"));
 			}
 		}
 	}
@@ -46,13 +50,17 @@ class Mouse {
 	onMouseOut(event) {
 		const cell = this.getCell(event);
 
+		if (!cell || !cell.domElement) {
+			return;
+		}
+
 		if (cell.domElement.classList.contains("teleport")) {
 			cell.domElement.classList.remove("highlight");
 
 			if (cell.teleportDestination) {
 				cell.teleportDestination.domElement.classList.remove("highlight");
 			} else {
-				cell.teleportSource.domElement.classList.remove("highlight");
+				cell.teleportSources.forEach(teleportSource => teleportSource.domElement.classList.remove("highlight"));
 			}
 		}
 	}
