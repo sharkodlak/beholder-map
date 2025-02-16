@@ -25,6 +25,12 @@ class Cell {
 		this.domElement.cell = this;
 	}
 
+	destinationScrollIntoView() {
+		if (this.domElement.classList.contains("pair") && this.destination) {
+			this.destination.domElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+	}
+
 	getDomElement() {
 		return this.domElement;
 	}

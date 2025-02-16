@@ -4,6 +4,7 @@ import { Party } from '../Party.js';
 class Mouse {
 	initializeForMap(DOMmap) {
 		DOMmap.addEventListener('click', this.onClick.bind(this));
+		DOMmap.addEventListener('dblclick', this.onDoubleClick.bind(this));
 		DOMmap.addEventListener('mousedown', this.onMouseDown.bind(this));
 		DOMmap.addEventListener('mouseover', this.onMouseOver.bind(this));
 		DOMmap.addEventListener('mouseout', this.onMouseOut.bind(this));
@@ -14,6 +15,15 @@ class Mouse {
 
 		if (cell) {
 			Party.place(cell);
+		}
+	}
+
+	onDoubleClick(event) {
+		const cell = this.getCell(event);
+
+		if (cell) {
+			cell.togglePairPermanentHighlight();
+			cell.destinationScrollIntoView();
 		}
 	}
 
