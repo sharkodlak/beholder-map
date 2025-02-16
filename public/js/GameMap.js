@@ -54,7 +54,7 @@ class GameMap {
 		structures = structures || {};
 		this.map = map;
 
-		this.holes = structures.holes || {};
+		this.holes = structures.holes || [];
 		this.pointsOfInterest = structures.pointsOfInterest || [];
 		this.portals = structures.portals || {};
 		this.stairs = structures.stairs || {};

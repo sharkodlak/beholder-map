@@ -203,14 +203,27 @@ class Mapper {
 
 		cells.forEach((row, y) => {
 			row.forEach((cell, x) => {
-				if (Object.keys(this.map.holes).length !== 0) {
-					const offset = this.map.holes.offset || this.previousLevel.map.holes.offset;
-					const level = this.level - offset.level;
-					const floorCells = offset.level === 0 ? this.cells : this.previousLevel.cells;
-					const dstX = x - offset.x;
-					const dstY = y - offset.y;
+				if (this.map.holes.length > 0) {
+					let offset;
 
 					if (Mapper.blockGroups["hole"][cell.block]?.includes("ceil")) {
+						holesIterator: for (const holeGroup of this.map.holes) {
+							if (holeGroup.positions) {
+								for (const [holeX, holeY] of holeGroup.positions ?? []) {
+									if (holeX === x && holeY === y) {
+										offset = holeGroup;
+										break holesIterator;
+									}
+								}
+							}
+
+							offset = holeGroup;
+						}
+
+						const level = offset.sameLevel ? this : this.previousLevel;
+						const floorCells = offset.sameLevel ? this.cells : this.previousLevel.cells;
+						const dstX = x - offset.x;
+						const dstY = y - offset.y;
 						const floorCell = floorCells[dstY][dstX];
 
 						floorCell.domElement.classList.add("pair");
@@ -221,7 +234,7 @@ class Mapper {
 					}
 				}
 
-				if (Object.keys(this.map.stairs).length !== 0) {
+				if (Object.keys(this.map.stairs).length > 0) {
 					if (Mapper.blockGroups["stairs up"][cell.block]) {
 						for (const [stairsCharacter, value] of Object.entries(this.map.stairs)) {
 							if (value[0] === x && value[1] === y) {
