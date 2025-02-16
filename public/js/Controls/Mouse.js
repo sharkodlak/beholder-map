@@ -26,6 +26,7 @@ class Mouse {
 
 		if (event.button === 1) {
 			console.log(cell);
+			cell.togglePairPermanentHighlight();
 		}
 	}
 
@@ -36,15 +37,7 @@ class Mouse {
 			return;
 		}
 
-		if (cell.domElement.classList.contains("pair")) {
-			cell.domElement.classList.add("highlight");
-
-			if (cell.destination) {
-				cell.destination.domElement.classList.add("highlight");
-			} else {
-				cell.sources.forEach(source => source.domElement.classList.add("highlight"));
-			}
-		}
+		cell.pairHighlight();
 	}
 
 	onMouseOut(event) {
@@ -54,15 +47,7 @@ class Mouse {
 			return;
 		}
 
-		if (cell.domElement.classList.contains("pair")) {
-			cell.domElement.classList.remove("highlight");
-
-			if (cell.destination) {
-				cell.destination.domElement.classList.remove("highlight");
-			} else {
-				cell.sources.forEach(source => source.domElement.classList.remove("highlight"));
-			}
-		}
+		cell.pairRemoveHighlight();
 	}
 
 	getCell(event) {

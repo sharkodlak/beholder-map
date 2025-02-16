@@ -94,6 +94,49 @@ class Cell {
 		return Mapper.isPassable(this.block);
 	}
 
+	pairHighlight(permanent = false) {
+		if (this.domElement.classList.contains("pair")) {
+			const classList = ["highlight"];
+
+			if (permanent) {
+				classList.push("permanent");
+			}
+
+			this.domElement.classList.add(...classList);
+
+			if (this.destination) {
+				this.destination.domElement.classList.add(...classList);
+			} else {
+				this.sources.forEach(source => source.domElement.classList.add(...classList));
+			}
+		}
+	}
+
+	pairRemoveHighlight(permanent = false) {
+		if (this.domElement.classList.contains("pair")) {
+			const classList = ["highlight"];
+
+			if (permanent) {
+				classList.push("permanent");
+			}
+
+			if (permanent || !this.domElement.classList.contains("permanent")) {
+				this.domElement.classList.remove(...classList);
+			}
+
+			if (this.destination) {
+				if (permanent || !this.destination.domElement.classList.contains("permanent")) {
+					this.destination.domElement.classList.remove(...classList);
+				}
+			} else {
+				this.sources.forEach(
+					source => (permanent || !source.domElement.classList.contains("permanent"))
+						&& source.domElement.classList.remove(...classList)
+				);
+			}
+		}
+	}
+
 	placeParty() {
 		if (!this.isPassable()) {
 			return;
@@ -120,6 +163,14 @@ class Cell {
 	setTwoWayDestination(cell) {
 		this.setDestination(cell);
 		cell.setDestination(this);
+	}
+
+	togglePairPermanentHighlight() {
+		if (this.domElement.classList.contains("permanent")) {
+			this.pairRemoveHighlight(true);
+		} else {
+			this.pairHighlight(true);
+		}
 	}
 }
 
