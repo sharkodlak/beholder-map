@@ -1,6 +1,7 @@
 class GameMap {
 	holes;
 	map;
+	pointsOfInterest;
 	portals;
 	stairs;
 	teleports;
@@ -54,6 +55,7 @@ class GameMap {
 		this.map = map;
 
 		this.holes = structures.holes || {};
+		this.pointsOfInterest = structures.pointsOfInterest || [];
 		this.portals = structures.portals || {};
 		this.stairs = structures.stairs || {};
 		this.teleports = structures.teleports || [];

@@ -150,6 +150,11 @@ td {
 	transform: rotate(180deg);
 }
 
+.poi,
+.unknown {
+	background-color: #dfe;
+}
+
 .portal > div {
 	position: absolute;
 	top: 0;
@@ -275,8 +280,4 @@ td {
 .teleport.visible {
 	background-image: url('../img/css/teleport.svg');
 	background-size: 100% 100%;
-}
-
-.unknown {
-	background-color: #dfe;
 }

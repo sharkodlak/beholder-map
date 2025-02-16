@@ -152,6 +152,12 @@ class Mapper {
 					}
 				}
 
+				for (const [poiX, poiY] of this.map.pointsOfInterest) {
+					if (poiX === x && poiY === y) {
+						domCell.classList.add("poi");
+					}
+				}
+
 				for (const [portalNumber, portal] of Object.entries(this.map.portals || {})) {
 					if (portal.position[0] === x && portal.position[1] === y) {
 						const domLabel = document.createElement("span");
