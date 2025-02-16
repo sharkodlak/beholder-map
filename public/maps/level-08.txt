@@ -62,5 +62,12 @@
 		[27, 6, 13, 18, "one way"],
 		[17, 14, 21, 16, "leap of faith"],
 		[22, 17, 25, 18, "reward"]
+	],
+	"holes": [
+		{
+			"x": 0,
+			"y": 0,
+			"sameLevel": false
+		}
 	]
 }
