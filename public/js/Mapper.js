@@ -105,6 +105,7 @@ class Mapper {
 	}
 
 	cells;
+	level;
 	map;
 	previousLevel;
 	nextLevel;
@@ -112,6 +113,11 @@ class Mapper {
 	constructor(map, previousLevel) {
 		this.map = map;
 		this.previousLevel = previousLevel;
+		this.setLevel();
+	}
+
+	setLevel() {
+		this.level = (this.previousLevel?.level || 0) + 1;
 	}
 
 	setNextLevel(nextLevel) {
@@ -166,7 +172,7 @@ class Mapper {
 
 				const northcell = cells[y - 1] && cells[y - 1][x];
 				const westcell = cells[y][x - 1];
-				const cell = new Cell(block, domCell, x, y);
+				const cell = new Cell(block, domCell, x, y, this.level);
 				cells[y][x] = cell;
 
 				if (typeof westcell !== "undefined") {
@@ -192,18 +198,20 @@ class Mapper {
 		cells.forEach((row, y) => {
 			row.forEach((cell, x) => {
 				if (Object.keys(this.map.holes).length !== 0) {
-					const dstX = x + this.map.holes.offset.x;
-					const dstY = y + this.map.holes.offset.y;
+					const offset = this.map.holes.offset || this.previousLevel.map.holes.offset;
+					const level = this.level - offset.level;
+					const floorCells = offset.level === 0 ? this.cells : this.previousLevel.cells;
+					const dstX = x - offset.x;
+					const dstY = y - offset.y;
 
-					if (Mapper.blockGroups["hole"][cell.block]?.includes("floor")) {
-						const dstCell = cells[dstY][dstX];
+					if (Mapper.blockGroups["hole"][cell.block]?.includes("ceil")) {
+						const floorCell = floorCells[dstY][dstX];
 
+						floorCell.domElement.classList.add("pair");
+						floorCell.setDestination(cell);
+
+						cell.domElement.classList.add("destination");
 						cell.domElement.classList.add("pair");
-						cell.setDestination(dstCell);
-
-						dstCell.domElement.classList.add("destination");
-						dstCell.domElement.classList.add("pair");
-						dstCell;
 					}
 				}
 

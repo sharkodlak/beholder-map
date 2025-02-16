@@ -5,6 +5,7 @@ import { Party } from './Party.js';
 class Cell {
 	block;
 	domElement;
+	level;
 	x;
 	y;
 	north;
@@ -14,11 +15,12 @@ class Cell {
 	destination;
 	sources = [];
 
-	constructor(block, domElement, x, y) {
+	constructor(block, domElement, x, y, level) {
 		this.block = block;
 		this.domElement = domElement;
 		this.x = x;
 		this.y = y;
+		this.level = level;
 
 		this.domElement.cell = this;
 	}
