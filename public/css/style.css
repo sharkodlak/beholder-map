@@ -200,6 +200,14 @@ td {
 	background-size: 100% 100%;
 }
 
+.rotator {
+	background-image: url('../img/css/rotator.svg');
+}
+
+.rotator.counter-clockwise {
+	transform: scaleX(-1);
+}
+
 .stairs > .stairs {
 	position: absolute;
 	width: 100%;
