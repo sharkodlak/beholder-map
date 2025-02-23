@@ -7,8 +7,9 @@ class Mapper {
 			" ": "hallway",
 			"_": "pressure-plate",
 			"*": "teleport visible",
-			"↻": "rotator clockwise",
-			"↺": "rotator counter-clockwise",
+			"↷": "rotator deg90 clockwise",
+			"↶": "rotator deg90 counter-clockwise",
+			"↻": "rotator deg180",
 		},
 		"blocks": {
 			"#": "block",

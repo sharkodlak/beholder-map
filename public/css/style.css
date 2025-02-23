@@ -200,12 +200,16 @@ td {
 	background-size: 100% 100%;
 }
 
-.rotator {
+.rotator.deg90 {
 	background-image: url('../img/css/rotator.svg');
 }
 
-.rotator.counter-clockwise {
+.rotator.deg90.counter-clockwise {
 	transform: scaleX(-1);
+}
+
+.rotator.deg180 {
+	background-image: url('../img/css/rotator deg180.svg');
 }
 
 .stairs > .stairs {
