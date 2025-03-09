@@ -183,7 +183,7 @@ class Mapper {
 				for (const [portalNumber, portal] of Object.entries(this.map.portals || {})) {
 					if (portal.position[0] === x && portal.position[1] === y) {
 						const domLabel = document.createElement("span");
-						domLabel.textContent = portalNumber;
+						domLabel.textContent = portal.label || portalNumber;
 						domCell.appendChild(domLabel);
 					}
 				}

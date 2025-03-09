@@ -34,24 +34,22 @@
 {
 	"portals": {
 		"Ⅰ": {
-			"position": [11, 28],
-			"destination": [16, 0, "level-06"]
+			"position": [11, 28]
 		},
 		"Ⅱ": {
 			"position": [12, 27],
-			"destination": [16, 0, "level-06"]
+			"destination": [10, 4, "level-05"]
 		},
 		"Ⅳ": {
 			"position": [13, 27],
-			"destination": [16, 0, "level-06"]
+			"destination": [29, 20, "level-09"]
 		},
 		"Ⅴ": {
 			"position": [14, 27],
-			"destination": [16, 0, "level-06"]
+			"destination": [16, 0, "level-04"]
 		},
 		"Ⅷ": {
-			"position": [15, 28],
-			"destination": [16, 0, "level-06"]
+			"position": [15, 28]
 		}
 	},
 	"stairs": {
@@ -67,5 +65,9 @@
 	"teleports": [
 		[20, 22, 29, 19, "rare items"],
 		[30, 20, 20, 20, "rare items"]
+	],
+	"pointsOfInterest": [
+		[11, 28],
+		[15, 28]
 	]
 }

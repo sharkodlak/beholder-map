@@ -35,7 +35,7 @@
 	"portals": {
 		"Ⅱ": {
 			"position": [10, 4],
-			"destination": [16, 0, "level-06"]
+			"destination": [12, 27, "level-07"]
 		}
 	},
 	"stairs": {
