@@ -107,6 +107,25 @@ class Mapper {
 		return availableBlocksVertical;
 	}
 
+	static pairCells(srcCell, dstCell, options = {}) {
+		options.classList = options.classList || [];
+		options.classList.push("pair");
+		srcCell.domElement.classList.add(...options.classList);
+
+		options.classList.push("destination");
+		dstCell.domElement.classList.add(...options.classList);
+
+		if (options.name) {
+			srcCell.domElement.title = options.name;
+			dstCell.domElement.title = options.name;
+		}
+
+		options.twoWay
+			? srcCell.setTwoWayDestination(dstCell)
+			: srcCell.setDestination(dstCell)
+		;
+	}
+
 	cells;
 	level;
 	map;
@@ -229,11 +248,7 @@ class Mapper {
 						const dstY = y - offset.y;
 						const floorCell = floorCells[dstY][dstX];
 
-						floorCell.domElement.classList.add("pair");
-						floorCell.setDestination(cell);
-
-						cell.domElement.classList.add("destination");
-						cell.domElement.classList.add("pair");
+						Mapper.pairCells(floorCell, cell);
 					}
 				}
 
@@ -246,11 +261,7 @@ class Mapper {
 								const [dstX, dstY] = stairsMapper.map.stairs[lowerStairsCharacter];
 								const dstCell = stairsMapper.cells[dstY][dstX];
 
-								cell.domElement.classList.add("pair");
-								cell.setTwoWayDestination(dstCell);
-
-								dstCell.domElement.classList.add("destination");
-								dstCell.domElement.classList.add("pair");
+								Mapper.pairCells(cell, dstCell, { twoWay: true });
 							}
 						}
 					}
@@ -262,22 +273,10 @@ class Mapper {
 			const srcCell = cells[srcY][srcX];
 			const dstCell = cells[dstY][dstX];
 
-			srcCell.domElement.classList.add("pair");
-			srcCell.domElement.classList.add("teleport");
-			srcCell.domElement.title = name;
-			srcCell.setDestination(dstCell);
-
-			dstCell.domElement.classList.add("destination");
-			dstCell.domElement.classList.add("pair");
-			dstCell.domElement.classList.add("teleport");
-			dstCell.domElement.title = name;
+			Mapper.pairCells(srcCell, dstCell, { classList: ['teleport'], name });
 		});
 
 		return domMap;
-	}
-
-	generateStairs(cell) {
-
 	}
 }
 
