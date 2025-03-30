@@ -32,6 +32,14 @@
 				previousLevel = await loadAndDisplay(map, elementId, previousLevel);
 			}
 
+			// Pair cells from last level up to the first level
+			let currentLevel = previousLevel;
+
+			while (currentLevel) {
+				currentLevel.pairPortalCells();
+				currentLevel = currentLevel.getPreviousLevel();
+			}
+
 			const availableBlocks = Mapper.getAvailableBlocks();
 			const availableBlocksMap = new GameMap(availableBlocks);
 			const availableBlocksMapper = new Mapper(availableBlocksMap);

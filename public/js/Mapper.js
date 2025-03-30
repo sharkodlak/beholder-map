@@ -146,6 +146,20 @@ class Mapper {
 		this.nextLevel = nextLevel;
 	}
 
+	getLevel(levelNumber) {
+		let current = this;
+
+		while (current.level !== levelNumber) {
+			current = current.level > levelNumber ? current.previousLevel : current.nextLevel;
+		}
+
+		return current;
+	}
+
+	getPreviousLevel() {
+		return this.previousLevel;
+	}
+
 	generateMap(elementId) {
 		const domMap = document.getElementById(elementId);
 		domMap.mapper = this;
@@ -242,7 +256,6 @@ class Mapper {
 							offset = holeGroup;
 						}
 
-						const level = offset.sameLevel ? this : this.previousLevel;
 						const floorCells = offset.sameLevel ? this.cells : this.previousLevel.cells;
 						const dstX = x - offset.x;
 						const dstY = y - offset.y;
@@ -277,6 +290,37 @@ class Mapper {
 		});
 
 		return domMap;
+	}
+
+	getCell(x, y) {
+		return this.cells[y][x];
+	}
+
+	pairPortalCells() {
+		this.cells.forEach((row, y) => {
+			row.forEach((cell, x) => {
+				if (Object.keys(this.map.portals).length > 0) {
+					if (Mapper.blockGroups["ancient portal"][cell.block]) {
+						for (const [, portal] of Object.entries(this.map.portals)) {
+							if (portal.destination === undefined) {
+								continue;
+							}
+
+							const dstLevelNumber = portal.destination?.[2]
+								? parseInt(portal.destination[2].substr(6))
+								: this.level
+							;
+
+							if (portal.position[0] === x && portal.position[1] === y) {
+								const dstLevel = this.getLevel(dstLevelNumber);
+								const dstCell = dstLevel.getCell(portal.destination[0], portal.destination[1]);
+								Mapper.pairCells(cell, dstCell);
+							}
+						}
+					}
+				}
+			});
+		});
 	}
 }
 
