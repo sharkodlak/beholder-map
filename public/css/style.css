@@ -26,6 +26,10 @@ td {
 	clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
+.beholder {
+	background-color: #f99;
+}
+
 .block,
 .portal,
 .stairs.up,
@@ -148,6 +152,16 @@ td {
 
 #party.south {
 	transform: rotate(180deg);
+}
+
+.pedestal {
+	background-color: #eee;
+	background-image: url('../img/css/pedestal.svg');
+	background-size: 100% 100%;
+}
+
+.pedestal.eye {
+	background-image: url('../img/css/pedestal-eye.svg');
 }
 
 .poi,

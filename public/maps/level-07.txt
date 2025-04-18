@@ -34,7 +34,8 @@
 {
 	"portals": {
 		"Ⅰ": {
-			"position": [11, 28]
+			"position": [11, 28],
+			"destination": [14, 11, "level-11"]
 		},
 		"Ⅱ": {
 			"position": [12, 27],
@@ -67,7 +68,6 @@
 		[30, 20, 20, 20, "rare items"]
 	],
 	"pointsOfInterest": [
-		[11, 28],
 		[15, 28]
 	]
 }

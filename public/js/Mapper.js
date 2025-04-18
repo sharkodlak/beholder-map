@@ -15,6 +15,8 @@ class Mapper {
 			"#": "block",
 			"+": "expected block",
 			"=": "imaginary block",
+			"⊙": "pedestal",
+			"◉": "pedestal eye",
 			"?": "unknown",
 		},
 		"button": {
@@ -69,6 +71,7 @@ class Mapper {
 		"xtra": {
 			"^": "start",
 			"☥": "dvarwen cleric",
+			"✝": "beholder",
 		},
 	};
 
