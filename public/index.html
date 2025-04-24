@@ -2,106 +2,16 @@
 <html>
 
 <head>
-	<title>Eye of the Beholder: Levels</title>
+	<title>Eye of the Beholder games</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="module">
-		import { Controls } from "./js/Controls.js";
-		import { GameMap } from "./js/GameMap.js";
-		import { Mapper } from "./js/Mapper.js";
-
-
-		const controls = Controls.initialize();
-
-		async function initialize() {
-			const maps = {
-				// Add timestamt according to file last modification time
-				"level-01": "maps/level-01.txt?2025-02-22T18:00",
-				"level-02": "maps/level-02.txt?2025-03-09T19:00",
-				"level-03": "maps/level-03.txt?2025-04-24T18:44",
-				"level-04": "maps/level-04.txt?2025-03-22T17:49",
-				"level-05": "maps/level-05.txt?2025-03-23T08:59",
-				"level-06": "maps/level-06.txt?2025-03-22T13:16",
-				"level-07": "maps/level-07.txt?2025-04-13T19:17",
-				"level-08": "maps/level-08.txt?2025-03-30T17:36",
-				"level-09": "maps/level-09.txt?2025-03-09T19:31",
-				"level-10": "maps/level-10.txt?2025-03-30T18:22",
-				"level-11": "maps/level-11.txt?2025-04-18T10:16",
-				"level-12": "maps/level-12.txt?2025-04-24T18:49",
-			};
-			let previousLevel;
-
-			for (const [elementId, map] of Object.entries(maps)) {
-				previousLevel = await loadAndDisplay(map, elementId, previousLevel);
-			}
-
-			// Pair cells from last level up to the first level
-			let currentLevel = previousLevel;
-
-			while (currentLevel) {
-				currentLevel.pairPortalCells();
-				currentLevel = currentLevel.getPreviousLevel();
-			}
-
-			const availableBlocks = Mapper.getAvailableBlocks();
-			const availableBlocksMap = new GameMap(availableBlocks);
-			const availableBlocksMapper = new Mapper(availableBlocksMap);
-			const DOMmap = availableBlocksMapper.generateMap("available-blocks");
-		}
-
-		async function loadAndDisplay(map, elementId, previousLevel) {
-			const text = await GameMap.load(map);
-			const gameMap = GameMap.parse(text);
-			const mapper = new Mapper(gameMap, previousLevel);
-
-			if (previousLevel) {
-				previousLevel.setNextLevel(mapper);
-			}
-
-			const DOMmap = mapper.generateMap(elementId);
-			controls.initializeForMap(DOMmap);
-			return mapper;
-		}
-
-		document.addEventListener("DOMContentLoaded", initialize);
-	</script>
 </head>
 
 <body>
-	<h2>Level 01</h2>
-	<table id="level-01" class="map"></table>
-
-	<h2>Level 02</h2>
-	<table id="level-02" class="map"></table>
-
-	<h2>Level 03</h2>
-	<table id="level-03" class="map"></table>
-
-	<h2>Level 04</h2>
-	<table id="level-04" class="map"></table>
-
-	<h2>Level 05</h2>
-	<table id="level-05" class="map"></table>
-
-	<h2>Level 06</h2>
-	<table id="level-06" class="map"></table>
-
-	<h2>Level 07</h2>
-	<table id="level-07" class="map"></table>
-
-	<h2>Level 08</h2>
-	<table id="level-08" class="map"></table>
-
-	<h2>Level 09</h2>
-	<table id="level-09" class="map"></table>
-
-	<h2>Level 10</h2>
-	<table id="level-10" class="map"></table>
-
-	<h2>Level 11</h2>
-	<table id="level-11" class="map"></table>
-
-	<h2>Level 12</h2>
-	<table id="level-12" class="map"></table>
-
-	<table id="available-blocks"></table>
+	<nav>
+		<ul>
+			<li><a href="eob1.html">Eye of the Beholder</a></li>
+			<li><a href="eob2.html">Eye of the Beholder II</a></li>
+			<li><a href="eob3.html">Eye of the Beholder III</a></li>
+		</ul>
+	</nav>
 </body>
