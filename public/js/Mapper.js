@@ -77,7 +77,7 @@ class Mapper {
 
 	static blocks = Object.assign({}, ...Object.values(Mapper.blockGroups));
 
-	static passableBlocks = " =,.;-|_↑←→↓↕⇧⇦⇨⇩*☥?";
+	static passableBlocks = " =,.;-|_↑←→↓↕⇧⇦⇨⇩*☥✝?";
 
 	static cellCreator = {
 		"button north south": (domCell) => {
