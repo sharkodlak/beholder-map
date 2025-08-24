@@ -40,6 +40,8 @@ class Mapper {
 			"⇦": "keyhole west",
 			"⇨": "keyhole east",
 			"⇩": "keyhole south",
+			"⇕": "keyhole north south",
+			"⇔": "keyhole east west",
 		},
 		/*
 		"niche": {
@@ -71,13 +73,16 @@ class Mapper {
 		"xtra": {
 			"^": "start",
 			"☥": "dvarwen cleric",
-			"✝": "beholder",
+			"👀": "beholder",
+			"✝": "grave",
+			"✚": "altar",
+			"&": "npc",
 		},
 	};
 
 	static blocks = Object.assign({}, ...Object.values(Mapper.blockGroups));
 
-	static passableBlocks = " =,.;-|_↑←→↓↕⇧⇦⇨⇩*☥✝?";
+	static passableBlocks = " =,.;-|_↑←→↓↕⇧⇦⇨⇩*☥✝?&";
 
 	static cellCreator = {
 		"button north south": (domCell) => {
@@ -269,12 +274,22 @@ class Mapper {
 				}
 
 				if (Object.keys(this.map.stairs).length > 0) {
-					if (Mapper.blockGroups["stairs up"][cell.block]) {
+					if (Mapper.blockGroups["stairs up"][cell.block] || Mapper.blockGroups["stairs down"][cell.block]) {
 						for (const [stairsCharacter, value] of Object.entries(this.map.stairs)) {
 							if (value[0] === x && value[1] === y) {
-								const lowerStairsCharacter = stairsCharacter.toLowerCase();
-								const stairsMapper = this.map.stairs[lowerStairsCharacter] ? this : this.previousLevel;
-								const [dstX, dstY] = stairsMapper.map.stairs[lowerStairsCharacter];
+								const oppositeCaseCharacter = stairsCharacter === stairsCharacter.toLowerCase()
+									? stairsCharacter.toUpperCase()
+									: stairsCharacter.toLowerCase()
+								;
+								const stairsMapper = this.map.stairs[oppositeCaseCharacter] ? this
+									: this.previousLevel?.map.stairs[oppositeCaseCharacter] ? this.previousLevel
+									: this.nextLevel;
+
+								if (!stairsMapper) {
+									continue;
+								}
+
+								const [dstX, dstY] = stairsMapper.map.stairs[oppositeCaseCharacter];
 								const dstCell = stairsMapper.cells[dstY][dstX];
 
 								Mapper.pairCells(cell, dstCell, { twoWay: true });

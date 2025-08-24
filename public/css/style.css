@@ -26,6 +26,20 @@ td {
 	clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
+.altar > div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 50%;
+	right: 50%;
+	background: linear-gradient(to right, #9Fc, #888);
+}
+
+.altar::after {
+	content: "altar";
+}
+
 .beholder {
 	background-color: #f99;
 }
@@ -124,6 +138,13 @@ td {
 	background-image: url('../img/css/keyhole-north.svg');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+}
+
+.npc div::before {
+	content: "npc";
+	display: flex;
+	text-align: center;
+	justify-content: center;
 }
 
 .pair.highlight {
