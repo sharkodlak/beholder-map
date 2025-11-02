@@ -15,15 +15,19 @@
 		async function initialize() {
 			const maps = {
 				// Add timestamt according to file last modification time
+				"level-00": "maps/eob2/level-00.txt?2025-08-24T07:41",
 				"level-01": "maps/eob2/level-01.txt?2025-08-16T17:20",
 				"level-02": "maps/eob2/level-02.txt?2025-08-24T17:29",
 				"level-03": "maps/eob2/level-03.txt?2025-08-24T07:41",
 				"level-04": "maps/eob2/level-04.txt?2025-08-24T07:41",
+				"level-05": "maps/eob2/level-05.txt?2025-08-24T07:41",
+				"level-06": "maps/eob2/level-06.txt?2025-08-24T07:41",
 			};
 			let previousLevel;
+			let minLevel = parseInt(Object.keys(maps)[0].split("-")[1], 10);
 
 			for (const [elementId, map] of Object.entries(maps)) {
-				previousLevel = await loadAndDisplay(map, elementId, previousLevel);
+				previousLevel = await loadAndDisplay(map, elementId, previousLevel, minLevel);
 			}
 
 			// Pair cells from last level up to the first level
@@ -40,10 +44,10 @@
 			const DOMmap = availableBlocksMapper.generateMap("available-blocks");
 		}
 
-		async function loadAndDisplay(map, elementId, previousLevel) {
+		async function loadAndDisplay(map, elementId, previousLevel, minLevel) {
 			const text = await GameMap.load(map);
 			const gameMap = GameMap.parse(text);
-			const mapper = new Mapper(gameMap, previousLevel);
+			const mapper = new Mapper(gameMap, previousLevel, minLevel);
 
 			if (previousLevel) {
 				previousLevel.setNextLevel(mapper);
@@ -59,6 +63,9 @@
 </head>
 
 <body>
+	<h2>Level 00</h2>
+	<table id="level-00" class="map"></table>
+
 	<h2>Level 01</h2>
 	<table id="level-01" class="map"></table>
 

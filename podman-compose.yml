@@ -1,11 +1,11 @@
 version: '3.8'
+name: beholder_map
 services:
     nginx:
-        image: nginx:latest
+        image: docker.io/library/nginx:latest
         volumes:
             - ./public:/usr/share/nginx/html:ro
         environment:
             - NGINX_SERVER_NAME=localhost
-        working_dir: /app
         ports:
-            - '80:80'
+            - '8080:80'

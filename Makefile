@@ -10,21 +10,21 @@ endif
 
 
 build:
-	docker-compose up --detach --build
+	podman-compose up --detach --build
 
 down:
-	docker-compose down
+	podman-compose down
 
 exec:
-	docker-compose exec $(SERVICE) bash
+	podman-compose exec $(SERVICE) bash
 
 in:
 	@$(MAKE) --silent exec $(SERVICE) $(ARGS)
 
 restart:
-	docker-compose restart
+	podman-compose restart
 
 up:
-	docker-compose up --detach
+	podman-compose up --detach
 
 .PHONY: down exec in restart up

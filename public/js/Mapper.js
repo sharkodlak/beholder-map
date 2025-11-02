@@ -140,14 +140,19 @@ class Mapper {
 	previousLevel;
 	nextLevel;
 
-	constructor(map, previousLevel) {
+	constructor(map, previousLevel, minLevel = 0) {
 		this.map = map;
 		this.previousLevel = previousLevel;
-		this.setLevel();
+		this.setLevel(minLevel);
 	}
 
-	setLevel() {
-		this.level = (this.previousLevel?.level || 0) + 1;
+	setLevel(minLevel = 0) {
+		if (this.previousLevel === undefined) {
+			this.level = minLevel;
+			return;
+		}
+
+		this.level = this.previousLevel.level + 1;
 	}
 
 	setNextLevel(nextLevel) {
